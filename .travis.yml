@@ -1,0 +1,13 @@
+---
+
+language: c
+
+matrix:
+  include:
+    - os: windows
+      script:
+        - echo "Windows"
+    - os: linux
+      dist: xenial
+      script:
+        - echo "Linux"
