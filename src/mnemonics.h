@@ -4,10 +4,7 @@
 
 #include <stdlib.h>
 
-
-struct dictionary {
-    unsigned char *words[2048];
-};
+#include "dictionary.h"
 
 /**
 @dict initialized dictionary used to generate mnemonics
@@ -30,7 +27,8 @@ int to_mnemonic(const struct dictionary *dict,
 @dict initialized dictionary used to generate mnemonics
 @mnemonic buffer containing bytes used to generate mnemonics, must be multiple of 11 bits
 @mnemonic_l size of the mnemonic string
-@delim delimiter used to separate words in mnemonic. One in {'\n', ',' , ';' , ' ' } (newline, single whitespace, comma, semicolon).
+@delim delimiter used to separate words in mnemonic. 
+  One in {'\n', ',' , ';' , ' ' } (newline, single whitespace, comma, semicolon).
 @delim_l delimeter length (without '\0')
 @seed_output address that will recieve newly allocated bytes output
 @seed_output_l address that will recieve size of output
