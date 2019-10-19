@@ -22,5 +22,8 @@ This project is a part of an assignament for PB193 - Secure coding principles an
 https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 
 ## Team Members
+- Atilla Farkas
+- Tomáš Madeja
+- Imrich Nagy
 
 
