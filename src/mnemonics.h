@@ -9,6 +9,7 @@
 /**
  * @brief entropy_to_mnemonic
  * @param dict      initialized dictionary
+ *                  if set to NULL, default dictionary will be used
  * @param entropy   16 to 32 bytes of entropy, must be multiple of 4
  * @param entropy_l length of entropy
  * @param output    stores pointer to allocated memory containing mnemonic
@@ -37,6 +38,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
 /**
  * @brief mnemonic_to_entropy
  * @param dict       initialized dictionary
+ *                   if set to NULL, default dictionary will be used
  * @param mnemonic   mnemonic phrase
  * @param mnemonic_l length of mnemonic phrase
  * @param entropy    stores pointer to allocated memory containing memory
