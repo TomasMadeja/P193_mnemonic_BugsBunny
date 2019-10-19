@@ -8,15 +8,6 @@
 #include "mnemonics.h"
 
 
-#define UNUSED(x) (void)(x)
-
-/*void printHex(unsigned char *bytes, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-        printf("%02x ", bytes[i]);
-    }
-    printf("\n");
-}*/
-
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
     unsigned char hash[SHA_DIGEST_LENGTH];
@@ -38,8 +29,9 @@ uint32_t pow2(uint8_t exp) {
 }
 
 int entropy_to_mnemonic(const struct dictionary *dict,
-                const unsigned char *entropy, size_t entropy_l,
-                unsigned char **output) {
+                        const unsigned char *entropy,
+                        size_t entropy_l,
+                        unsigned char **output) {
 
     unsigned char *bytes = malloc(entropy_l + 1);
     memcpy(bytes, entropy, entropy_l);
@@ -81,5 +73,26 @@ int entropy_to_mnemonic(const struct dictionary *dict,
     *output = out;
     free(bytes);
 
+    return 0;
+}
+
+int mnemonic_to_seed(const unsigned char *mnemonic,
+                     size_t mnemonic_l,
+                     const unsigned char *passphrase,
+                     size_t passphrase_l,
+                     unsigned char **seed) {
+
+    unsigned char *salt = malloc(passphrase_l + 8);
+    memcpy(salt, "mnemonic", 8);
+    memcpy(salt + 8, passphrase, passphrase_l);
+    unsigned char *out = malloc(64);
+
+    if (PKCS5_PBKDF2_HMAC((const char*) mnemonic, (int) mnemonic_l,
+                          salt, (int) passphrase_l + 8, 2048,
+                          EVP_sha512(), 64, out) != 1) {
+        return 1;
+    }
+
+    *seed = out;
     return 0;
 }

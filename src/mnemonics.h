@@ -29,8 +29,7 @@ int entropy_to_mnemonic(const struct dictionary *dict,
  * @param seed         stores pointer to allocated memory containing seed
  * @return 0 in case of success, error code otherwise
  */
-int mnemonic_to_seed(const struct dictionary *dict,
-                     unsigned char *mnemonic,
+int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t mnemonic_l,
                      const unsigned char *passphrase,
                      size_t passphrase_l,
@@ -45,7 +44,7 @@ int mnemonic_to_seed(const struct dictionary *dict,
  * @return 0 in case of success, error code otherwise
  */
 int mnemonic_to_entropy(const struct dictionary *dict,
-                        unsigned char *mnemonic,
+                        const unsigned char *mnemonic,
                         size_t mnemonic_l,
                         unsigned char **entropy);
 
