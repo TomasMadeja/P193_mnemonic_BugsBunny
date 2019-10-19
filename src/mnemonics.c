@@ -2,11 +2,33 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <openssl/evp.h>
+#include <openssl/sha.h>
+
 #include "mnemonics.h"
 
+
+#define UNUSED(x) (void)(x)
+
+/*void printHex(unsigned char *bytes, size_t len) {
+    for (size_t i = 0; i < len; i++) {
+        printf("%02x ", bytes[i]);
+    }
+    printf("\n");
+}*/
+
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
-    //TODO
-    memset(bytes + entropy_l, bytes[0], entropy_l / 32);
+
+    unsigned char hash[SHA_DIGEST_LENGTH];
+    unsigned int size = SHA_DIGEST_LENGTH;
+    EVP_MD_CTX *ctx;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return 1;
+    if (EVP_DigestInit_ex(ctx, EVP_sha256(), NULL) != 1) return 1;
+    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return 1;
+    if (EVP_DigestFinal_ex(ctx, hash, &size) != 1) return 1;
+
+    memcpy(bytes + entropy_l, hash, 1);
+
     return 0;
 }
 
@@ -20,7 +42,9 @@ int to_mnemonic(const struct dictionary *dict,
                 const unsigned char *delim, size_t delim_l,
                 unsigned char **output) {
 
-    unsigned char *bytes = malloc(entropy_l + entropy_l / 32);
+    UNUSED(delim_l);
+
+    unsigned char *bytes = malloc(entropy_l + 1);
     memcpy(bytes, entropy, entropy_l);
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
