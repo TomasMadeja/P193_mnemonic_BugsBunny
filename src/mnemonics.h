@@ -42,7 +42,7 @@ int to_mnemonic(const struct dictionary *dict,
 int from_mnemonic(const struct dictionary *dict,
                   unsigned char *mnemonic, size_t *mnemonic_l,
                   const unsigned char *delim, size_t delim_l,
-                  const unsigned char *passphrase,
+                  const unsigned char *passphrase, size_t passphrase_l,
                   unsigned char *seed_output, size_t *seed_output_l,
                   unsigned char *entropy_output, size_t *entropy_output_l);
 
