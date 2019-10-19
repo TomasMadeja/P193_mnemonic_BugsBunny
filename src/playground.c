@@ -10,9 +10,8 @@ int main(void) {
 
     struct dictionary dict[1];
     default_EN_dictionary(dict);
-    unsigned char c = ' ';
     unsigned char *out;
-    to_mnemonic(dict, bytes, 16, &c, 1, &out);
+    entropy_to_mnemonic(dict, bytes, 16, &out);
 
     printf("%s\n", out);
     

@@ -37,12 +37,9 @@ uint32_t pow2(uint8_t exp) {
     return res << exp;
 }
 
-int to_mnemonic(const struct dictionary *dict,
+int entropy_to_mnemonic(const struct dictionary *dict,
                 const unsigned char *entropy, size_t entropy_l,
-                const unsigned char *delim, size_t delim_l,
                 unsigned char **output) {
-
-    UNUSED(delim_l);
 
     unsigned char *bytes = malloc(entropy_l + 1);
     memcpy(bytes, entropy, entropy_l);
@@ -58,7 +55,7 @@ int to_mnemonic(const struct dictionary *dict,
     size_t bits = 0;
     while (bits < entropy_l * 8 + entropy_l * 8 / 32) {
 
-        out[len] = *delim;
+        out[len] = ' ';
         len++;
         if (bits == 0) {
             len--;
@@ -82,6 +79,7 @@ int to_mnemonic(const struct dictionary *dict,
     }
 
     *output = out;
+    free(bytes);
 
     return 0;
 }
