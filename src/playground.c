@@ -22,8 +22,11 @@ int main(void) {
     default_EN_dictionary(dict);
     unsigned char *mne;
     unsigned char *seed;
+    unsigned char *ent;
+    size_t size;
     entropy_to_mnemonic(dict, bytes, 16, &mne);
     mnemonic_to_seed(mne, strlen((char*) mne), (unsigned char*)"TREZOR", 6, &seed);
+    mnemonic_to_entropy(dict, mne, strlen((char*) mne), &ent, &size);
     printf("%s\n", mne);
     printHex(seed, 64);
 

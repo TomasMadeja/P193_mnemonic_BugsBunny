@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,11 +22,6 @@ int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
     memcpy(bytes + entropy_l, hash, 1);
 
     return 0;
-}
-
-uint32_t pow2(uint8_t exp) {
-    uint32_t res = 0x1;
-    return res << exp;
 }
 
 int entropy_to_mnemonic(const struct dictionary *dict,
@@ -94,5 +90,63 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
     }
 
     *seed = out;
+    return 0;
+}
+
+uint8_t next_word_size(const unsigned char *string) {
+    uint8_t i = 0;
+    for (; string[i] != 255; i++) {
+        if (string[i] == ' ' || string[i] == '\0') {
+            return i;
+        }
+    }
+    return 0;
+}
+
+int strcmp_to_space(const void *a, const void *b) {
+    size_t i = 0;
+    const unsigned char *x = *((const unsigned char* const*) a);
+    const unsigned char *y = *((const unsigned char* const*) b);
+    while (x[i] != ' ' && x[i] != '\0' &&
+           y[i] != ' ' && y[i] != '\0') {
+        i++;
+    }
+    return strncmp((const char*) x, (const char*) y, i);
+}
+
+int mnemonic_to_entropy(const struct dictionary *dict,
+                        const unsigned char *mnemonic,
+                        size_t mnemonic_l,
+                        unsigned char **entropy,
+                        size_t *entropy_l) {
+
+    uint8_t word_count = 1;
+    for (size_t i = 0; i < mnemonic_l; i++) {
+        if (mnemonic[i] == ' ') {
+            word_count++;
+        }
+    }
+    *entropy_l = (word_count * 11 - 1) / 8;
+
+    size_t position = 0;
+    uint16_t indexes[25];
+    indexes[word_count] = 0x0;
+
+    for (uint8_t i = 0; i < word_count; i++) {
+        uint8_t word_len = next_word_size(mnemonic + position);
+        const unsigned char *key = mnemonic + position;
+        unsigned char **result = bsearch(&key, dict->words, 2048,
+                                         sizeof (unsigned char *),
+                                         strcmp_to_space);
+
+        indexes[i] =  (uint16_t) (result - dict->words);
+        position += word_len + 1;
+    }
+
+    for (size_t i = 0; i < *entropy_l; i++) {
+        uint32_t joint = indexes[i * 8 / 11]; //TODO
+    }
+
+
     return 0;
 }
