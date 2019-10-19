@@ -7,41 +7,46 @@
 #include "dictionary.h"
 
 /**
-@dict initialized dictionary used to generate mnemonics
-@bytes buffer containing entropy bytes used to generate mnemonics
-@bytes_l size of input buffer, must be multiple of 4 bytes
-@output address that will recieve newly allocated delim separated mnemonics
-@output_l address that will recieve size of the output
-@delim delimiter to be used to separate words in output.
-  One in {'\n', ',' , ';' , ' ' } (newline, comma, semicolon, space).
-@delim_l delimeter length (without '\0')
-
-@return 0 IF success ELSE negative error code
-*/
-int to_mnemonic(const struct dictionary *dict,
-                const unsigned char *bytes, size_t bytes_l,
-                const unsigned char *delim, size_t delim_l,
-                unsigned char *output, size_t *output_l);
+ * @brief entropy_to_mnemonic
+ * @param dict      initialized dictionary
+ * @param entropy   16 to 32 bytes of entropy, must be multiple of 2
+ * @param entropy_l length of entropy
+ * @param output    stores pointer to allocated memory containing mnemonic
+ * @return 0 in case of success, error code otherwise
+ */
+int entropy_to_mnemonic(const struct dictionary *dict,
+                        const unsigned char *entropy,
+                        size_t entropy_l,
+                        unsigned char **mnemonic);
 
 /**
-@dict initialized dictionary used to generate mnemonics
-@mnemonic buffer containing bytes used to generate mnemonics, must be multiple of 11 bits
-@mnemonic_l size of the mnemonic string
-@delim delimiter used to separate words in mnemonic. 
-  One in {'\n', ',' , ';' , ' ' } (newline, single whitespace, comma, semicolon).
-@delim_l delimeter length (without '\0')
-@seed_output address that will recieve newly allocated bytes output
-@seed_output_l address that will recieve size of output
-@entropy_output set to NULL to not generate entropy
-@entropy_output_l
+ * @brief mnemonic_to_seed
+ * @param dict         initialized dictionary
+ * @param mnemonic     mnemonic phrase
+ * @param mnemonic_l   length of mnemonic phrase
+ * @param passphrase   passphrase
+ * @param passphrase_l length of passphrase
+ * @param seed         stores pointer to allocated memory containing seed
+ * @return 0 in case of success, error code otherwise
+ */
+int mnemonic_to_seed(const struct dictionary *dict,
+                     unsigned char *mnemonic,
+                     size_t mnemonic_l,
+                     const unsigned char *passphrase,
+                     size_t passphrase_l,
+                     unsigned char **seed);
 
-@return 0 IF success ELSE negative error code
-*/
-int from_mnemonic(const struct dictionary *dict,
-                  unsigned char *mnemonic, size_t *mnemonic_l,
-                  const unsigned char *delim, size_t delim_l,
-                  const unsigned char *passphrase, size_t passphrase_l,
-                  unsigned char *seed_output, size_t *seed_output_l,
-                  unsigned char *entropy_output, size_t *entropy_output_l);
+/**
+ * @brief mnemonic_to_entropy
+ * @param dict       initialized dictionary
+ * @param mnemonic   mnemonic phrase
+ * @param mnemonic_l length of mnemonic phrase
+ * @param entropy    stores pointer to allocated memory containing memory
+ * @return 0 in case of success, error code otherwise
+ */
+int mnemonic_to_entropy(const struct dictionary *dict,
+                        unsigned char *mnemonic,
+                        size_t mnemonic_l,
+                        unsigned char **entropy);
 
 #endif //MNEMONICS_H

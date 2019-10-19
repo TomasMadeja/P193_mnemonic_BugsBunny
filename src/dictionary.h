@@ -41,6 +41,11 @@ int parse_dict_from_file(
     struct dictionary *dict
 );
 
-int default_EN_dictionary(struct dictionary *dict);
+/**
+ * @brief default_EN_dictionary
+ * @param dictionary pointer to struct dictionary to be filled
+ * @return 0 in case of success, error code otherwise
+ */
+int default_EN_dictionary(struct dictionary *dictionary);
 
 #endif //DICTIONARY_H
