@@ -30,6 +30,10 @@ int main(void) {
     /* Converting entropy to a mnemonic phrase using the default dictionary. */
     entropy_to_mnemonic(NULL, input_entropy, TEST_VECTOR_LEN, &mnemonic);
 
+    /* ... using a given dictionary. */
+    /* entropy_to_mnemonic(default_EN_dictionary(), input_entropy
+     *                    , TEST_VECTOR_LEN, &mnemonic); */
+
     /* Printing the mnemonic phrase. */
     printf("ENTROPY -> MNEMONIC\n");
     printf("The mnemonic phrase for the entropy ");
@@ -41,7 +45,7 @@ int main(void) {
 
     unsigned char *seed;
 
-    /* Converting the mnemonic phrase to seed. */
+    /* Converting the mnemonic phrase to seed using the passphrase "TREZOR". */
     mnemonic_to_seed(mnemonic, strlen((char*) mnemonic),
                      (unsigned char*) "TREZOR", 6, &seed);
 
@@ -63,6 +67,11 @@ int main(void) {
     return_code = mnemonic_to_entropy(NULL,
                         mnemonic, strlen((char*) mnemonic),
                         &check_entropy, &check_entropy_size);
+
+    /* ... using a given dictionary. */
+    /* return_code = mnemonic_to_entropy(default_EN_dictionary(),
+                        mnemonic, strlen((char*) mnemonic),
+                        &check_entropy, &check_entropy_size);*/
 
     /* Printing out the result. */
     printf("MNEMONIC - ENTROPY CHECK\n");
