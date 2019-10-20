@@ -3,7 +3,14 @@
 
 #include "dictionary.h"
 
-int default_EN_dictionary(struct dictionary *dictionary) {
+
+static struct dictionary dictionary[1] = { { { NULL } } };
+
+struct dictionary *default_EN_dictionary(void) {
+    if (dictionary->words[0] != NULL) {
+        return dictionary;
+    }
+
     dictionary->words[0] = (unsigned char*) "abandon";
     dictionary->words[1] = (unsigned char*) "ability";
     dictionary->words[2] = (unsigned char*) "able";
@@ -2053,5 +2060,5 @@ int default_EN_dictionary(struct dictionary *dictionary) {
     dictionary->words[2046] = (unsigned char*) "zone";
     dictionary->words[2047] = (unsigned char*) "zoo";
 
-    return 0;
+    return dictionary;
 }

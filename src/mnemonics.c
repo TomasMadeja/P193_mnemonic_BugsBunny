@@ -8,6 +8,10 @@
 
 #include "mnemonics.h"
 
+int init_mnemonics(void) {
+    OpenSSL_add_all_algorithms();
+    return 0;
+}
 
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
@@ -24,10 +28,16 @@ int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
     return 0;
 }
 
-int entropy_to_mnemonic(const struct dictionary *dict,
+int entropy_to_mnemonic(const struct dictionary *dictionary,
                         const unsigned char *entropy,
                         size_t entropy_l,
                         unsigned char **output) {
+
+    const struct dictionary *dict = dictionary;
+
+    if (dictionary == NULL) {
+        dict = default_EN_dictionary();
+    }
 
     unsigned char *bytes = malloc(entropy_l + 1);
     memcpy(bytes, entropy, entropy_l);
@@ -89,6 +99,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
         return 1;
     }
 
+    free(salt);
     *seed = out;
     return 0;
 }
@@ -114,11 +125,17 @@ int strcmp_to_space(const void *a, const void *b) {
     return strncmp((const char*) x, (const char*) y, i);
 }
 
-int mnemonic_to_entropy(const struct dictionary *dict,
+int mnemonic_to_entropy(const struct dictionary *dictionary,
                         const unsigned char *mnemonic,
                         size_t mnemonic_l,
                         unsigned char **entropy,
                         size_t *entropy_l) {
+
+    const struct dictionary *dict = dictionary;
+
+    if (dictionary == NULL) {
+        dict = default_EN_dictionary();
+    }
 
     uint8_t word_count = 1;
     for (size_t i = 0; i < mnemonic_l; i++) {

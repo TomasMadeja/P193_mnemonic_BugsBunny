@@ -8,6 +8,7 @@ struct dictionary {
     unsigned char *words[2048];
 };
 
+
 /*
 @string input string of 2048 delimiter separated words
         IF NULL, function will create DEFAULT ENGLISH dictionary
@@ -42,10 +43,10 @@ int parse_dict_from_file(
 );
 
 /**
- * @brief default_EN_dictionary
- * @param dictionary pointer to struct dictionary to be filled
- * @return 0 in case of success, error code otherwise
+ * @brief Sets up the default dictionary if needed and returns pointer to it
+ * @return pointer to default EN dictionary
  */
-int default_EN_dictionary(struct dictionary *dictionary);
+struct dictionary *default_EN_dictionary(void);
+
 
 #endif //DICTIONARY_H
