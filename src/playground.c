@@ -7,7 +7,7 @@
 
 void printHex(unsigned char *bytes, size_t len) {
     for (size_t i = 0; i < len; i++) {
-        printf("%02x ", bytes[i]);
+        printf("%02x", bytes[i]);
     }
     printf("\n");
 }
@@ -27,8 +27,10 @@ int main(void) {
     entropy_to_mnemonic(dict, bytes, 16, &mne);
     mnemonic_to_seed(mne, strlen((char*) mne), (unsigned char*)"TREZOR", 6, &seed);
     mnemonic_to_entropy(dict, mne, strlen((char*) mne), &ent, &size);
+    printHex(bytes, 16);
     printf("%s\n", mne);
     printHex(seed, 64);
+    printHex(ent, 16);
 
     
     return EXIT_SUCCESS;

@@ -143,10 +143,17 @@ int mnemonic_to_entropy(const struct dictionary *dict,
         position += word_len + 1;
     }
 
+    unsigned char *out = malloc(*entropy_l);
+
     for (size_t i = 0; i < *entropy_l; i++) {
-        uint32_t joint = indexes[i * 8 / 11]; //TODO
+        size_t bits = 8 * i;
+        uint32_t joint = ((uint32_t) indexes[bits / 11]) << 11;
+        joint ^= (uint32_t) indexes[bits / 11 + 1];
+        joint <<= 10 + bits % 11;
+        joint >>= 32 - 8;
+        out[i] = (uint8_t) joint;
     }
 
-
+    *entropy = out;
     return 0;
 }
