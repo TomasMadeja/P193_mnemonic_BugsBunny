@@ -18,10 +18,10 @@ int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
     unsigned char hash[SHA_DIGEST_LENGTH];
     unsigned int size = SHA_DIGEST_LENGTH;
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return 1;
-    if (EVP_DigestInit_ex(ctx, EVP_sha256(), NULL) != 1) return 1;
-    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return 1;
-    if (EVP_DigestFinal_ex(ctx, hash, &size) != 1) return 1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
+    if (EVP_DigestInit_ex(ctx, EVP_sha256(), NULL) != 1) return -1;
+    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return -1;
+    if (EVP_DigestFinal_ex(ctx, hash, &size) != 1) return -1;
 
     memcpy(bytes + entropy_l, hash, 1);
 
@@ -33,6 +33,10 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
+    if (entropy_l % 4 != 0) {
+        return -1;
+    }
+
     const struct dictionary *dict = dictionary;
 
     if (dictionary == NULL) {
@@ -43,7 +47,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     memcpy(bytes, entropy, entropy_l);
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
-        return 1;
+        return -1;
     }
 
     size_t capacity = 256;
