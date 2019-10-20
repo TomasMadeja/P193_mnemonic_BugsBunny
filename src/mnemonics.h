@@ -8,20 +8,20 @@
 
 /**
  * @brief entropy_to_mnemonic
- * @param dict      initialized dictionary
- * @param entropy   16 to 32 bytes of entropy, must be multiple of 2
- * @param entropy_l length of entropy
- * @param output    stores pointer to allocated memory containing mnemonic
+ * @param dictionary initialized dictionary
+ *                   if set to NULL, default dictionary will be used
+ * @param entropy    16 to 32 bytes of entropy, must be multiple of 4
+ * @param entropy_l  length of entropy
+ * @param output     stores pointer to allocated memory containing mnemonic
  * @return 0 in case of success, error code otherwise
  */
-int entropy_to_mnemonic(const struct dictionary *dict,
+int entropy_to_mnemonic(const struct dictionary *dictionary,
                         const unsigned char *entropy,
                         size_t entropy_l,
                         unsigned char **mnemonic);
 
 /**
  * @brief mnemonic_to_seed
- * @param dict         initialized dictionary
  * @param mnemonic     mnemonic phrase
  * @param mnemonic_l   length of mnemonic phrase
  * @param passphrase   passphrase
@@ -29,8 +29,7 @@ int entropy_to_mnemonic(const struct dictionary *dict,
  * @param seed         stores pointer to allocated memory containing seed
  * @return 0 in case of success, error code otherwise
  */
-int mnemonic_to_seed(const struct dictionary *dict,
-                     unsigned char *mnemonic,
+int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t mnemonic_l,
                      const unsigned char *passphrase,
                      size_t passphrase_l,
@@ -38,15 +37,20 @@ int mnemonic_to_seed(const struct dictionary *dict,
 
 /**
  * @brief mnemonic_to_entropy
- * @param dict       initialized dictionary
+ * @param dictionary initialized dictionary
+ *                   if set to NULL, default dictionary will be used
  * @param mnemonic   mnemonic phrase
  * @param mnemonic_l length of mnemonic phrase
  * @param entropy    stores pointer to allocated memory containing memory
+ * @param entropy_l  pointer to variable to store size of entropy in bytes
  * @return 0 in case of success, error code otherwise
  */
-int mnemonic_to_entropy(const struct dictionary *dict,
-                        unsigned char *mnemonic,
+int mnemonic_to_entropy(const struct dictionary *dictionary,
+                        const unsigned char *mnemonic,
                         size_t mnemonic_l,
-                        unsigned char **entropy);
+                        unsigned char **entropy,
+                        size_t *entropy_l);
+
+int init_mnemonics(void);
 
 #endif //MNEMONICS_H

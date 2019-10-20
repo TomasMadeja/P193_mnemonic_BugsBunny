@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,15 +8,10 @@
 
 #include "mnemonics.h"
 
-
-#define UNUSED(x) (void)(x)
-
-/*void printHex(unsigned char *bytes, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-        printf("%02x ", bytes[i]);
-    }
-    printf("\n");
-}*/
+int init_mnemonics(void) {
+    OpenSSL_add_all_algorithms();
+    return 0;
+}
 
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
@@ -32,14 +28,16 @@ int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
     return 0;
 }
 
-uint32_t pow2(uint8_t exp) {
-    uint32_t res = 0x1;
-    return res << exp;
-}
+int entropy_to_mnemonic(const struct dictionary *dictionary,
+                        const unsigned char *entropy,
+                        size_t entropy_l,
+                        unsigned char **output) {
 
-int entropy_to_mnemonic(const struct dictionary *dict,
-                const unsigned char *entropy, size_t entropy_l,
-                unsigned char **output) {
+    const struct dictionary *dict = dictionary;
+
+    if (dictionary == NULL) {
+        dict = default_EN_dictionary();
+    }
 
     unsigned char *bytes = malloc(entropy_l + 1);
     memcpy(bytes, entropy, entropy_l);
@@ -81,5 +79,98 @@ int entropy_to_mnemonic(const struct dictionary *dict,
     *output = out;
     free(bytes);
 
+    return 0;
+}
+
+int mnemonic_to_seed(const unsigned char *mnemonic,
+                     size_t mnemonic_l,
+                     const unsigned char *passphrase,
+                     size_t passphrase_l,
+                     unsigned char **seed) {
+
+    unsigned char *salt = malloc(passphrase_l + 8);
+    memcpy(salt, "mnemonic", 8);
+    memcpy(salt + 8, passphrase, passphrase_l);
+    unsigned char *out = malloc(64);
+
+    if (PKCS5_PBKDF2_HMAC((const char*) mnemonic, (int) mnemonic_l,
+                          salt, (int) passphrase_l + 8, 2048,
+                          EVP_sha512(), 64, out) != 1) {
+        return 1;
+    }
+
+    free(salt);
+    *seed = out;
+    return 0;
+}
+
+uint8_t next_word_size(const unsigned char *string) {
+    uint8_t i = 0;
+    for (; string[i] != 255; i++) {
+        if (string[i] == ' ' || string[i] == '\0') {
+            return i;
+        }
+    }
+    return 0;
+}
+
+int strcmp_to_space(const void *a, const void *b) {
+    size_t i = 0;
+    const unsigned char *x = *((const unsigned char* const*) a);
+    const unsigned char *y = *((const unsigned char* const*) b);
+    while (x[i] != ' ' && x[i] != '\0' &&
+           y[i] != ' ' && y[i] != '\0') {
+        i++;
+    }
+    return strncmp((const char*) x, (const char*) y, i);
+}
+
+int mnemonic_to_entropy(const struct dictionary *dictionary,
+                        const unsigned char *mnemonic,
+                        size_t mnemonic_l,
+                        unsigned char **entropy,
+                        size_t *entropy_l) {
+
+    const struct dictionary *dict = dictionary;
+
+    if (dictionary == NULL) {
+        dict = default_EN_dictionary();
+    }
+
+    uint8_t word_count = 1;
+    for (size_t i = 0; i < mnemonic_l; i++) {
+        if (mnemonic[i] == ' ') {
+            word_count++;
+        }
+    }
+    *entropy_l = (word_count * 11 - 1) / 8;
+
+    size_t position = 0;
+    uint16_t indexes[25];
+    indexes[word_count] = 0x0;
+
+    for (uint8_t i = 0; i < word_count; i++) {
+        uint8_t word_len = next_word_size(mnemonic + position);
+        const unsigned char *key = mnemonic + position;
+        unsigned char **result = bsearch(&key, dict->words, 2048,
+                                         sizeof (unsigned char *),
+                                         strcmp_to_space);
+
+        indexes[i] =  (uint16_t) (result - dict->words);
+        position += word_len + 1;
+    }
+
+    unsigned char *out = malloc(*entropy_l);
+
+    for (size_t i = 0; i < *entropy_l; i++) {
+        size_t bits = 8 * i;
+        uint32_t joint = ((uint32_t) indexes[bits / 11]) << 11;
+        joint ^= (uint32_t) indexes[bits / 11 + 1];
+        joint <<= 10 + bits % 11;
+        joint >>= 32 - 8;
+        out[i] = (uint8_t) joint;
+    }
+
+    *entropy = out;
     return 0;
 }
