@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "dictionary.h"
+#include "errorcodes.h"
 
 
 static struct dictionary dictionary[1] = { { { NULL } } };
