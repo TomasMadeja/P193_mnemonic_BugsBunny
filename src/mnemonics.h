@@ -1,10 +1,10 @@
 #ifndef MNEMONICS_H
 #define MNEMONICS_H
 
-
 #include <stdlib.h>
 
 #include "dictionary.h"
+
 
 /**
  * @brief entropy_to_mnemonic
@@ -28,7 +28,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
  * @param passphrase   passphrase
  * @param passphrase_l length of passphrase
  * @param seed         stores pointer to allocated memory containing seed
- * @return 0 in case of success, error code otherwise
+ * @return 0 in case of success, negative error code otherwise
  */
 int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t mnemonic_l,
@@ -44,7 +44,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
  * @param mnemonic_l length of mnemonic phrase
  * @param entropy    stores pointer to allocated memory containing memory
  * @param entropy_l  pointer to variable to store size of entropy in bytes
- * @return 0 in case of success, error code otherwise
+ * @return 0 in case of success, negative error code otherwise
  */
 int mnemonic_to_entropy(const struct dictionary *dictionary,
                         const unsigned char *mnemonic,

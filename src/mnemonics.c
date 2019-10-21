@@ -15,13 +15,14 @@ int init_mnemonics(void) {
 
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
-    unsigned char hash[SHA_DIGEST_LENGTH];
-    unsigned int size = SHA_DIGEST_LENGTH;
+    unsigned char hash[32];
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return 1;
-    if (EVP_DigestInit_ex(ctx, EVP_sha256(), NULL) != 1) return 1;
-    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return 1;
-    if (EVP_DigestFinal_ex(ctx, hash, &size) != 1) return 1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
+    if (EVP_DigestInit(ctx, EVP_sha256()) != 1) return -1;
+    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return -1;
+    if (EVP_DigestFinal(ctx, hash, NULL) != 1) return -1;
+
+    EVP_MD_CTX_destroy(ctx);
 
     memcpy(bytes + entropy_l, hash, 1);
 
@@ -33,6 +34,10 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
+    if (entropy_l % 4 != 0) {
+        return -1;
+    }
+
     const struct dictionary *dict = dictionary;
 
     if (dictionary == NULL) {
@@ -43,7 +48,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     memcpy(bytes, entropy, entropy_l);
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
-        return 1;
+        return -1;
     }
 
     size_t capacity = 256;
@@ -82,6 +87,90 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     return 0;
 }
 
+int sha512(const unsigned char *message, size_t message_l, unsigned char *out) {
+
+    EVP_MD_CTX *ctx;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
+    if (EVP_DigestInit(ctx, EVP_sha512()) != 1) return -1;
+    if (EVP_DigestUpdate(ctx, message, message_l) != 1) return -1;
+    if (EVP_DigestFinal(ctx, out, NULL) != 1) return -1;
+
+    EVP_MD_CTX_destroy(ctx);
+    return 0;
+}
+
+void array_128_pad(unsigned char array[128], unsigned char pad) {
+    for (uint8_t i = 0; i < 128; i++) {
+        array[i] ^= pad;
+    }
+}
+
+int hmac_sha512(const unsigned char *key, size_t key_l,
+                const unsigned char *message, size_t message_l,
+                unsigned char *out) {
+
+    unsigned char key_ipad[128];
+    unsigned char key_opad[128];
+
+    if (key_l <= 128) {
+        memcpy(key_ipad, key, key_l);
+        memset(key_ipad + key_l, 0, 128 - key_l);
+    } else {
+        sha512(key, key_l, key_ipad);
+    }
+    memcpy(key_opad, key_ipad, 128);
+
+
+    array_128_pad(key_ipad, 0x36);
+    array_128_pad(key_opad, 0x5c);
+
+    unsigned char *digest_inner = malloc(message_l + 128);
+    unsigned char *digest_outer = malloc(192);
+
+    memcpy(digest_inner, key_ipad, 128);
+    memcpy(digest_inner + 128, message, message_l);
+
+    sha512(digest_inner, message_l + 128, digest_outer + 128);
+    memcpy(digest_outer, key_opad, 128);
+
+    sha512(digest_outer, 192, out);
+
+    free(digest_inner);
+    free(digest_outer);
+    return 0;
+}
+
+void array_64_xor(uint8_t dst[64], uint8_t src[64]) {
+    for (uint8_t i = 0; i < 64; i++) {
+        dst[i] ^= src[i];
+    }
+}
+
+int pbkdf2_hmac_sha512_2048(const unsigned char *input, size_t input_l,
+                            const unsigned char *salt, size_t salt_l,
+                            unsigned char *out) {
+
+    unsigned char dk[64];
+    unsigned char u[64];
+    unsigned char *salt_and_int = malloc(salt_l + 4);
+    memcpy(salt_and_int, salt, salt_l);
+    memcpy(salt_and_int + salt_l, "\x00\x00\x00\x01", 4);
+
+    hmac_sha512(input, input_l, salt_and_int, salt_l + 4, dk);
+    free(salt_and_int);
+
+    memcpy(u, dk, 64);
+
+    for (uint16_t i = 0; i < 2047; i++) {
+        hmac_sha512(input, input_l, u, 64, u);
+        array_64_xor(dk, u);
+    }
+
+    memcpy(out, dk, 64);
+
+    return 0;
+}
+
 int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t mnemonic_l,
                      const unsigned char *passphrase,
@@ -93,11 +182,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
     memcpy(salt + 8, passphrase, passphrase_l);
     unsigned char *out = malloc(64);
 
-    if (PKCS5_PBKDF2_HMAC((const char*) mnemonic, (int) mnemonic_l,
-                          salt, (int) passphrase_l + 8, 2048,
-                          EVP_sha512(), 64, out) != 1) {
-        return 1;
-    }
+    pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, passphrase_l + 8, out);
 
     free(salt);
     *seed = out;
