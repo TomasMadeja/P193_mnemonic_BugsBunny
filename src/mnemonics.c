@@ -84,7 +84,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     *output = out;
     free(bytes);
 
-    return 0;
+    return (int) len;
 }
 
 int sha512(const unsigned char *message, size_t message_l, unsigned char *out) {
