@@ -13,7 +13,8 @@
  * @param entropy    16 to 32 bytes of entropy, must be multiple of 4
  * @param entropy_l  length of entropy
  * @param output     stores pointer to allocated memory containing mnemonic
- * @return 0 in case of success, error code otherwise
+ * @return           length of mnemonic phrase in characters 
+ *                   or negative error code in case of failure
  */
 int entropy_to_mnemonic(const struct dictionary *dictionary,
                         const unsigned char *entropy,
