@@ -22,7 +22,9 @@ add_subdirectory(src)
 
 enable_testing()
 
-add_subdirectory(tests)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../tests)
+
 
 # Add build target to generate Coverage Test Report to all compiled object files
 find_program(GCOV gcov)
