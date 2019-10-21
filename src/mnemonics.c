@@ -4,29 +4,29 @@
 #include <string.h>
 
 #include <openssl/evp.h>
-#include <openssl/sha.h>
 
+#include "errorcodes.h"
 #include "mnemonics.h"
 
 int init_mnemonics(void) {
     OpenSSL_add_all_algorithms();
-    return 0;
+    return EC_OK;
 }
 
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
     unsigned char hash[32];
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
-    if (EVP_DigestInit(ctx, EVP_sha256()) != 1) return -1;
-    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return -1;
-    if (EVP_DigestFinal(ctx, hash, NULL) != 1) return -1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return EC_OPENSSL_ERROR;
+    if (EVP_DigestInit(ctx, EVP_sha256()) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestFinal(ctx, hash, NULL) != 1) return EC_OPENSSL_ERROR;
 
     EVP_MD_CTX_destroy(ctx);
 
-    memcpy(bytes + entropy_l, hash, 1);
+    bytes[entropy_l] = hash[0];
 
-    return 0;
+    return EC_OK;
 }
 
 int entropy_to_mnemonic(const struct dictionary *dictionary,
@@ -34,8 +34,15 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
+    if (entropy == NULL) {
+        return EC_NULL_POINTER;
+    }
     if (entropy_l % 4 != 0) {
-        return -1;
+        return EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4;
+    }
+
+    if (entropy_l < 16 || entropy_l > 32) {
+        return EC_ENTROPY_LENGTH_NOT_WITHIN_16_32;
     }
 
     const struct dictionary *dict = dictionary;
@@ -45,15 +52,26 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     }
 
     unsigned char *bytes = malloc(entropy_l + 1);
-    memcpy(bytes, entropy, entropy_l);
+    if (bytes == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    if(memcpy_s(bytes, entropy_l, entropy, entropy_l) != 0) {
+        free(bytes);
+        return EC_ALLOCATION_ERROR;
+    }
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
-        return -1;
+        return EC_OPENSSL_ERROR;
     }
 
     size_t capacity = 256;
     size_t len = 0;
     unsigned char* out = malloc(capacity);
+    if (out == NULL) {
+        free(bytes);
+        return EC_ALLOCATION_ERROR;
+    }
 
     size_t bits = 0;
     while (bits < entropy_l * 8 + entropy_l * 8 / 32) {
@@ -73,7 +91,13 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
 
         if (len + strlen((char*) (dict->words[joint])) + 1 >= capacity) {
             capacity *= 2;
-            out = realloc(out, capacity);
+            unsigned char *temp = realloc(out, capacity);
+            if (temp == NULL) {
+                free(bytes);
+                free(out);
+                return EC_ALLOCATION_ERROR;
+            }
+            out = temp;
         }
         sprintf((char*) out + len, "%s", dict->words[joint]);
         len += strlen((char*) (dict->words[joint]));
@@ -90,13 +114,13 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
 int sha512(const unsigned char *message, size_t message_l, unsigned char *out) {
 
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
-    if (EVP_DigestInit(ctx, EVP_sha512()) != 1) return -1;
-    if (EVP_DigestUpdate(ctx, message, message_l) != 1) return -1;
-    if (EVP_DigestFinal(ctx, out, NULL) != 1) return -1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return EC_OPENSSL_ERROR;
+    if (EVP_DigestInit(ctx, EVP_sha512()) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestUpdate(ctx, message, message_l) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestFinal(ctx, out, NULL) != 1) return EC_OPENSSL_ERROR;
 
     EVP_MD_CTX_destroy(ctx);
-    return 0;
+    return EC_OK;
 }
 
 void array_128_pad(unsigned char array[128], unsigned char pad) {
