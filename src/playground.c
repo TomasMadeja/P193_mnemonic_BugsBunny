@@ -40,6 +40,6 @@ int main(void) {
     free(mnemonic);
     free(seed);
     free(check_entropy);
-    
+
     return EXIT_SUCCESS;
 }
