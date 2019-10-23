@@ -7,7 +7,7 @@
 #define VECTOR_PASSPHRASE "TREZOR"
 #define VECTOR_PASSPHRASE_L 6
 
-STAR_TEST (vector_0_en)
+START_TEST (vector_0_en)
 {
 #define VECTOR_0_M_LEN 93
 #define VECTOR_0_E_LEN 16
@@ -30,7 +30,7 @@ STAR_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -40,7 +40,7 @@ STAR_TEST (vector_0_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_0_M_LEN,
         "Output mnemonic size didn't match."
@@ -59,7 +59,7 @@ STAR_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -67,12 +67,6 @@ STAR_TEST (vector_0_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_0_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -89,7 +83,7 @@ STAR_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -99,7 +93,6 @@ STAR_TEST (vector_0_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_0_E_LEN,
         "Output entropy size didn't match."
@@ -112,7 +105,7 @@ STAR_TEST (vector_0_en)
 }
 END_TEST
 
-STAR_TEST (vector_1_en)
+START_TEST (vector_1_en)
 {
 #define VECTOR_1_M_LEN 75
 #define VECTOR_1_E_LEN 16
@@ -135,7 +128,7 @@ STAR_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -145,7 +138,7 @@ STAR_TEST (vector_1_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_1_M_LEN,
         "Output mnemonic size didn't match."
@@ -164,7 +157,7 @@ STAR_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -172,12 +165,6 @@ STAR_TEST (vector_1_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_1_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -194,7 +181,7 @@ STAR_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -204,7 +191,6 @@ STAR_TEST (vector_1_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_1_E_LEN,
         "Output entropy size didn't match."
@@ -217,7 +203,7 @@ STAR_TEST (vector_1_en)
 }
 END_TEST
 
-STAR_TEST (vector_2_en)
+START_TEST (vector_2_en)
 {
 #define VECTOR_2_M_LEN 79
 #define VECTOR_2_E_LEN 16
@@ -240,7 +226,7 @@ STAR_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -250,7 +236,7 @@ STAR_TEST (vector_2_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_2_M_LEN,
         "Output mnemonic size didn't match."
@@ -269,7 +255,7 @@ STAR_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -277,12 +263,6 @@ STAR_TEST (vector_2_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_2_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -299,7 +279,7 @@ STAR_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -309,7 +289,6 @@ STAR_TEST (vector_2_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_2_E_LEN,
         "Output entropy size didn't match."
@@ -322,7 +301,7 @@ STAR_TEST (vector_2_en)
 }
 END_TEST
 
-STAR_TEST (vector_3_en)
+START_TEST (vector_3_en)
 {
 #define VECTOR_3_M_LEN 49
 #define VECTOR_3_E_LEN 16
@@ -345,7 +324,7 @@ STAR_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -355,7 +334,7 @@ STAR_TEST (vector_3_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_3_M_LEN,
         "Output mnemonic size didn't match."
@@ -374,7 +353,7 @@ STAR_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -382,12 +361,6 @@ STAR_TEST (vector_3_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_3_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -404,7 +377,7 @@ STAR_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -414,7 +387,6 @@ STAR_TEST (vector_3_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_3_E_LEN,
         "Output entropy size didn't match."
@@ -427,7 +399,7 @@ STAR_TEST (vector_3_en)
 }
 END_TEST
 
-STAR_TEST (vector_4_en)
+START_TEST (vector_4_en)
 {
 #define VECTOR_4_M_LEN 141
 #define VECTOR_4_E_LEN 24
@@ -450,7 +422,7 @@ STAR_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -460,7 +432,7 @@ STAR_TEST (vector_4_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_4_M_LEN,
         "Output mnemonic size didn't match."
@@ -479,7 +451,7 @@ STAR_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -487,12 +459,6 @@ STAR_TEST (vector_4_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_4_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -509,7 +475,7 @@ STAR_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -519,7 +485,6 @@ STAR_TEST (vector_4_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_4_E_LEN,
         "Output entropy size didn't match."
@@ -532,7 +497,7 @@ STAR_TEST (vector_4_en)
 }
 END_TEST
 
-STAR_TEST (vector_5_en)
+START_TEST (vector_5_en)
 {
 #define VECTOR_5_M_LEN 110
 #define VECTOR_5_E_LEN 24
@@ -555,7 +520,7 @@ STAR_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -565,7 +530,7 @@ STAR_TEST (vector_5_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_5_M_LEN,
         "Output mnemonic size didn't match."
@@ -584,7 +549,7 @@ STAR_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -592,12 +557,6 @@ STAR_TEST (vector_5_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_5_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -614,7 +573,7 @@ STAR_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -624,7 +583,6 @@ STAR_TEST (vector_5_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_5_E_LEN,
         "Output entropy size didn't match."
@@ -637,7 +595,7 @@ STAR_TEST (vector_5_en)
 }
 END_TEST
 
-STAR_TEST (vector_6_en)
+START_TEST (vector_6_en)
 {
 #define VECTOR_6_M_LEN 123
 #define VECTOR_6_E_LEN 24
@@ -660,7 +618,7 @@ STAR_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -670,7 +628,7 @@ STAR_TEST (vector_6_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_6_M_LEN,
         "Output mnemonic size didn't match."
@@ -689,7 +647,7 @@ STAR_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -697,12 +655,6 @@ STAR_TEST (vector_6_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_6_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -719,7 +671,7 @@ STAR_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -729,7 +681,6 @@ STAR_TEST (vector_6_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_6_E_LEN,
         "Output entropy size didn't match."
@@ -742,7 +693,7 @@ STAR_TEST (vector_6_en)
 }
 END_TEST
 
-STAR_TEST (vector_7_en)
+START_TEST (vector_7_en)
 {
 #define VECTOR_7_M_LEN 72
 #define VECTOR_7_E_LEN 24
@@ -765,7 +716,7 @@ STAR_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -775,7 +726,7 @@ STAR_TEST (vector_7_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_7_M_LEN,
         "Output mnemonic size didn't match."
@@ -794,7 +745,7 @@ STAR_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -802,12 +753,6 @@ STAR_TEST (vector_7_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_7_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -824,7 +769,7 @@ STAR_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -834,7 +779,6 @@ STAR_TEST (vector_7_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_7_E_LEN,
         "Output entropy size didn't match."
@@ -847,7 +791,7 @@ STAR_TEST (vector_7_en)
 }
 END_TEST
 
-STAR_TEST (vector_8_en)
+START_TEST (vector_8_en)
 {
 #define VECTOR_8_M_LEN 187
 #define VECTOR_8_E_LEN 32
@@ -870,7 +814,7 @@ STAR_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -880,7 +824,7 @@ STAR_TEST (vector_8_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_8_M_LEN,
         "Output mnemonic size didn't match."
@@ -899,7 +843,7 @@ STAR_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -907,12 +851,6 @@ STAR_TEST (vector_8_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_8_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -929,7 +867,7 @@ STAR_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -939,7 +877,6 @@ STAR_TEST (vector_8_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_8_E_LEN,
         "Output entropy size didn't match."
@@ -952,7 +889,7 @@ STAR_TEST (vector_8_en)
 }
 END_TEST
 
-STAR_TEST (vector_9_en)
+START_TEST (vector_9_en)
 {
 #define VECTOR_9_M_LEN 148
 #define VECTOR_9_E_LEN 32
@@ -975,7 +912,7 @@ STAR_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -985,7 +922,7 @@ STAR_TEST (vector_9_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_9_M_LEN,
         "Output mnemonic size didn't match."
@@ -1004,7 +941,7 @@ STAR_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1012,12 +949,6 @@ STAR_TEST (vector_9_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_9_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1034,7 +965,7 @@ STAR_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1044,7 +975,6 @@ STAR_TEST (vector_9_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_9_E_LEN,
         "Output entropy size didn't match."
@@ -1057,7 +987,7 @@ STAR_TEST (vector_9_en)
 }
 END_TEST
 
-STAR_TEST (vector_10_en)
+START_TEST (vector_10_en)
 {
 #define VECTOR_10_M_LEN 164
 #define VECTOR_10_E_LEN 32
@@ -1080,7 +1010,7 @@ STAR_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1090,7 +1020,7 @@ STAR_TEST (vector_10_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_10_M_LEN,
         "Output mnemonic size didn't match."
@@ -1109,7 +1039,7 @@ STAR_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1117,12 +1047,6 @@ STAR_TEST (vector_10_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_10_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1139,7 +1063,7 @@ STAR_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1149,7 +1073,6 @@ STAR_TEST (vector_10_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_10_E_LEN,
         "Output entropy size didn't match."
@@ -1162,7 +1085,7 @@ STAR_TEST (vector_10_en)
 }
 END_TEST
 
-STAR_TEST (vector_11_en)
+START_TEST (vector_11_en)
 {
 #define VECTOR_11_M_LEN 96
 #define VECTOR_11_E_LEN 32
@@ -1185,7 +1108,7 @@ STAR_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1195,7 +1118,7 @@ STAR_TEST (vector_11_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_11_M_LEN,
         "Output mnemonic size didn't match."
@@ -1214,7 +1137,7 @@ STAR_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1222,12 +1145,6 @@ STAR_TEST (vector_11_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_11_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1244,7 +1161,7 @@ STAR_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1254,7 +1171,6 @@ STAR_TEST (vector_11_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_11_E_LEN,
         "Output entropy size didn't match."
@@ -1267,7 +1183,7 @@ STAR_TEST (vector_11_en)
 }
 END_TEST
 
-STAR_TEST (vector_12_en)
+START_TEST (vector_12_en)
 {
 #define VECTOR_12_M_LEN 76
 #define VECTOR_12_E_LEN 16
@@ -1290,7 +1206,7 @@ STAR_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1300,7 +1216,7 @@ STAR_TEST (vector_12_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_12_M_LEN,
         "Output mnemonic size didn't match."
@@ -1319,7 +1235,7 @@ STAR_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1327,12 +1243,6 @@ STAR_TEST (vector_12_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_12_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1349,7 +1259,7 @@ STAR_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1359,7 +1269,6 @@ STAR_TEST (vector_12_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_12_E_LEN,
         "Output entropy size didn't match."
@@ -1372,7 +1281,7 @@ STAR_TEST (vector_12_en)
 }
 END_TEST
 
-STAR_TEST (vector_13_en)
+START_TEST (vector_13_en)
 {
 #define VECTOR_13_M_LEN 119
 #define VECTOR_13_E_LEN 24
@@ -1395,7 +1304,7 @@ STAR_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1405,7 +1314,7 @@ STAR_TEST (vector_13_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_13_M_LEN,
         "Output mnemonic size didn't match."
@@ -1424,7 +1333,7 @@ STAR_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1432,12 +1341,6 @@ STAR_TEST (vector_13_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_13_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1454,7 +1357,7 @@ STAR_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1464,7 +1367,6 @@ STAR_TEST (vector_13_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_13_E_LEN,
         "Output entropy size didn't match."
@@ -1477,7 +1379,7 @@ STAR_TEST (vector_13_en)
 }
 END_TEST
 
-STAR_TEST (vector_14_en)
+START_TEST (vector_14_en)
 {
 #define VECTOR_14_M_LEN 156
 #define VECTOR_14_E_LEN 32
@@ -1500,7 +1402,7 @@ STAR_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1510,7 +1412,7 @@ STAR_TEST (vector_14_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_14_M_LEN,
         "Output mnemonic size didn't match."
@@ -1529,7 +1431,7 @@ STAR_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1537,12 +1439,6 @@ STAR_TEST (vector_14_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_14_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1559,7 +1455,7 @@ STAR_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1569,7 +1465,6 @@ STAR_TEST (vector_14_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_14_E_LEN,
         "Output entropy size didn't match."
@@ -1582,7 +1477,7 @@ STAR_TEST (vector_14_en)
 }
 END_TEST
 
-STAR_TEST (vector_15_en)
+START_TEST (vector_15_en)
 {
 #define VECTOR_15_M_LEN 72
 #define VECTOR_15_E_LEN 16
@@ -1605,7 +1500,7 @@ STAR_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1615,7 +1510,7 @@ STAR_TEST (vector_15_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_15_M_LEN,
         "Output mnemonic size didn't match."
@@ -1634,7 +1529,7 @@ STAR_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1642,12 +1537,6 @@ STAR_TEST (vector_15_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_15_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1664,7 +1553,7 @@ STAR_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1674,7 +1563,6 @@ STAR_TEST (vector_15_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_15_E_LEN,
         "Output entropy size didn't match."
@@ -1687,7 +1575,7 @@ STAR_TEST (vector_15_en)
 }
 END_TEST
 
-STAR_TEST (vector_16_en)
+START_TEST (vector_16_en)
 {
 #define VECTOR_16_M_LEN 106
 #define VECTOR_16_E_LEN 24
@@ -1710,7 +1598,7 @@ STAR_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1720,7 +1608,7 @@ STAR_TEST (vector_16_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_16_M_LEN,
         "Output mnemonic size didn't match."
@@ -1739,7 +1627,7 @@ STAR_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1747,12 +1635,6 @@ STAR_TEST (vector_16_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_16_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1769,7 +1651,7 @@ STAR_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1779,7 +1661,6 @@ STAR_TEST (vector_16_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_16_E_LEN,
         "Output entropy size didn't match."
@@ -1792,7 +1673,7 @@ STAR_TEST (vector_16_en)
 }
 END_TEST
 
-STAR_TEST (vector_17_en)
+START_TEST (vector_17_en)
 {
 #define VECTOR_17_M_LEN 156
 #define VECTOR_17_E_LEN 32
@@ -1815,7 +1696,7 @@ STAR_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1825,7 +1706,7 @@ STAR_TEST (vector_17_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_17_M_LEN,
         "Output mnemonic size didn't match."
@@ -1844,7 +1725,7 @@ STAR_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1852,12 +1733,6 @@ STAR_TEST (vector_17_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_17_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1874,7 +1749,7 @@ STAR_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1884,7 +1759,6 @@ STAR_TEST (vector_17_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_17_E_LEN,
         "Output entropy size didn't match."
@@ -1897,7 +1771,7 @@ STAR_TEST (vector_17_en)
 }
 END_TEST
 
-STAR_TEST (vector_18_en)
+START_TEST (vector_18_en)
 {
 #define VECTOR_18_M_LEN 74
 #define VECTOR_18_E_LEN 16
@@ -1920,7 +1794,7 @@ STAR_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -1930,7 +1804,7 @@ STAR_TEST (vector_18_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_18_M_LEN,
         "Output mnemonic size didn't match."
@@ -1949,7 +1823,7 @@ STAR_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -1957,12 +1831,6 @@ STAR_TEST (vector_18_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_18_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -1979,7 +1847,7 @@ STAR_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -1989,7 +1857,6 @@ STAR_TEST (vector_18_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_18_E_LEN,
         "Output entropy size didn't match."
@@ -2002,7 +1869,7 @@ STAR_TEST (vector_18_en)
 }
 END_TEST
 
-STAR_TEST (vector_19_en)
+START_TEST (vector_19_en)
 {
 #define VECTOR_19_M_LEN 118
 #define VECTOR_19_E_LEN 24
@@ -2025,7 +1892,7 @@ STAR_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -2035,7 +1902,7 @@ STAR_TEST (vector_19_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_19_M_LEN,
         "Output mnemonic size didn't match."
@@ -2054,7 +1921,7 @@ STAR_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -2062,12 +1929,6 @@ STAR_TEST (vector_19_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_19_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -2084,7 +1945,7 @@ STAR_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -2094,7 +1955,6 @@ STAR_TEST (vector_19_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_19_E_LEN,
         "Output entropy size didn't match."
@@ -2107,7 +1967,7 @@ STAR_TEST (vector_19_en)
 }
 END_TEST
 
-STAR_TEST (vector_20_en)
+START_TEST (vector_20_en)
 {
 #define VECTOR_20_M_LEN 146
 #define VECTOR_20_E_LEN 32
@@ -2130,7 +1990,7 @@ STAR_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -2140,7 +2000,7 @@ STAR_TEST (vector_20_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_20_M_LEN,
         "Output mnemonic size didn't match."
@@ -2159,7 +2019,7 @@ STAR_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -2167,12 +2027,6 @@ STAR_TEST (vector_20_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_20_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -2189,7 +2043,7 @@ STAR_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -2199,7 +2053,6 @@ STAR_TEST (vector_20_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_20_E_LEN,
         "Output entropy size didn't match."
@@ -2212,7 +2065,7 @@ STAR_TEST (vector_20_en)
 }
 END_TEST
 
-STAR_TEST (vector_21_en)
+START_TEST (vector_21_en)
 {
 #define VECTOR_21_M_LEN 78
 #define VECTOR_21_E_LEN 16
@@ -2235,7 +2088,7 @@ STAR_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -2245,7 +2098,7 @@ STAR_TEST (vector_21_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_21_M_LEN,
         "Output mnemonic size didn't match."
@@ -2264,7 +2117,7 @@ STAR_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -2272,12 +2125,6 @@ STAR_TEST (vector_21_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_21_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -2294,7 +2141,7 @@ STAR_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -2304,7 +2151,6 @@ STAR_TEST (vector_21_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_21_E_LEN,
         "Output entropy size didn't match."
@@ -2317,7 +2163,7 @@ STAR_TEST (vector_21_en)
 }
 END_TEST
 
-STAR_TEST (vector_22_en)
+START_TEST (vector_22_en)
 {
 #define VECTOR_22_M_LEN 120
 #define VECTOR_22_E_LEN 24
@@ -2340,7 +2186,7 @@ STAR_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -2350,7 +2196,7 @@ STAR_TEST (vector_22_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_22_M_LEN,
         "Output mnemonic size didn't match."
@@ -2369,7 +2215,7 @@ STAR_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -2377,12 +2223,6 @@ STAR_TEST (vector_22_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_22_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -2399,7 +2239,7 @@ STAR_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -2409,7 +2249,6 @@ STAR_TEST (vector_22_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_22_E_LEN,
         "Output entropy size didn't match."
@@ -2422,7 +2261,7 @@ STAR_TEST (vector_22_en)
 }
 END_TEST
 
-STAR_TEST (vector_23_en)
+START_TEST (vector_23_en)
 {
 #define VECTOR_23_M_LEN 152
 #define VECTOR_23_E_LEN 32
@@ -2445,7 +2284,7 @@ STAR_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "entropy_to_mnemonic nonzero error code %d",
         err
     );
@@ -2455,7 +2294,7 @@ STAR_TEST (vector_23_en)
         "Output mnemonic is NULL."
     );
 
-    unsigned char *mnemonic_l = strlen((char *) mnemonic);
+    size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_23_M_LEN,
         "Output mnemonic size didn't match."
@@ -2474,7 +2313,7 @@ STAR_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_seed nonzero error code %d.",
         err
     );
@@ -2482,12 +2321,6 @@ STAR_TEST (vector_23_en)
     ck_assert_msg(
         seed != NULL,
         "Output seed is NULL."
-    );
-
-    unsigned char *seed_l = strlen((char *) seed);
-    ck_assert_msg(
-        mnemonic_l == VECTOR_23_M_LEN,
-        "Output seed size didn't match."
     );
 
     ck_assert_msg(
@@ -2504,7 +2337,7 @@ STAR_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err != 0,
+        err == 0,
         "mnemonic_to_entropy nonzero error code %d.",
         err
     );
@@ -2514,7 +2347,6 @@ STAR_TEST (vector_23_en)
         "Output entropy is NULL."
     );
 
-    unsigned char *seed_l = strlen((char *) seed);
     ck_assert_msg(
         s_entropy_l == VECTOR_23_E_LEN,
         "Output entropy size didn't match."
@@ -2526,6 +2358,8 @@ STAR_TEST (vector_23_en)
     );
 }
 END_TEST
+
+
 
 Suite * mnemonics_test_suite(void)
 {
