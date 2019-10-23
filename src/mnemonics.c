@@ -62,10 +62,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
         return EC_ALLOCATION_ERROR;
     }
 
-    if(memcpy_s(bytes, entropy_l, entropy, entropy_l) != 0) {
-        free(bytes);
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(bytes, entropy, entropy_l);
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
         return EC_OPENSSL_ERROR;
@@ -148,9 +145,7 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
     int ret = 0;
 
     if (key_l <= SHA2_BLOCK_SIZE) {
-        if (memcpy_s(key_ipad, key_l, key, key_l) != 0) {
-            return EC_ALLOCATION_ERROR;
-        }
+        memcpy(key_ipad, key, key_l);
         memset(key_ipad + key_l, 0, SHA2_BLOCK_SIZE - key_l);
     } else {
         ret = sha512(key, key_l, key_ipad);
@@ -158,9 +153,7 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
             return ret;
         }
     }
-    if (memcpy_s(key_opad, SHA2_BLOCK_SIZE, key_ipad, SHA2_BLOCK_SIZE) != 0) {
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(key_opad, key_ipad, SHA2_BLOCK_SIZE);
 
 
     array_128_pad(key_ipad, IPAD);
@@ -176,16 +169,8 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
         return EC_ALLOCATION_ERROR;
     }
 
-    if (memcpy_s(digest_inner, SHA2_BLOCK_SIZE, key_ipad, SHA2_BLOCK_SIZE) != 0) {
-        free(digest_inner);
-        free(digest_outer);
-        return EC_ALLOCATION_ERROR;
-    }
-    if (memcpy_s(digest_inner + SHA2_BLOCK_SIZE, message_l, message, message_l) != 0) {
-        free(digest_inner);
-        free(digest_outer);
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(digest_inner, key_ipad, SHA2_BLOCK_SIZE);
+    memcpy(digest_inner + SHA2_BLOCK_SIZE, message, message_l);
 
     ret = sha512(digest_inner, message_l + SHA2_BLOCK_SIZE, digest_outer + SHA2_BLOCK_SIZE);
     if (ret != EC_OK) {
@@ -194,11 +179,7 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
         return ret;
     }
 
-    if (memcpy_s(digest_outer, SHA2_BLOCK_SIZE, key_opad, SHA2_BLOCK_SIZE) != 0) {
-        free(digest_inner);
-        free(digest_outer);
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(digest_outer, key_opad, SHA2_BLOCK_SIZE);
 
     ret = sha512(digest_outer, SHA2_BLOCK_SIZE + SHA512_DIGEST_SIZE, out);
 
@@ -227,12 +208,8 @@ int pbkdf2_hmac_sha512_2048(const unsigned char *input, size_t input_l,
         return EC_ALLOCATION_ERROR;
     }
 
-    if (memcpy_s(salt_and_int, salt_l, salt, salt_l) != 0) {
-        return EC_ALLOCATION_ERROR;
-    }
-    if (memcpy_s(salt_and_int + salt_l, 4, BIG_ENDIAN_ZERO, 4) != 0) {
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(salt_and_int, salt, salt_l);
+    memcpy(salt_and_int + salt_l, BIG_ENDIAN_ZERO, 4);
 
     int ret = 0;
 
@@ -243,9 +220,7 @@ int pbkdf2_hmac_sha512_2048(const unsigned char *input, size_t input_l,
         return ret;
     }
 
-    if (memcpy_s(u, SHA512_DIGEST_SIZE, dk, SHA512_DIGEST_SIZE) != 0) {
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(u, dk, SHA512_DIGEST_SIZE);
 
     for (uint16_t i = 0; i < ROUNDS - 1; i++) {
         ret = hmac_sha512(input, input_l, u, SHA512_DIGEST_SIZE, u);
@@ -255,9 +230,7 @@ int pbkdf2_hmac_sha512_2048(const unsigned char *input, size_t input_l,
         array_64_xor(dk, u);
     }
 
-    if (memcpy_s(out, SHA512_DIGEST_SIZE, dk, SHA512_DIGEST_SIZE) != 0) {
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(out, dk, SHA512_DIGEST_SIZE);
 
     return EC_OK;
 }
@@ -285,11 +258,8 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
         return EC_ALLOCATION_ERROR;
     }
 
-    if (memcpy_s(salt, 8, "mnemonic", 8) != 0 ||
-        memcpy_s(salt + 8, pass_l, pass, pass_l) != 0) {
-        free(salt);
-        return EC_ALLOCATION_ERROR;
-    }
+    memcpy(salt, "mnemonic", 8);
+    memcpy(salt + 8, pass, pass_l);
 
     unsigned char *out = malloc(SHA512_DIGEST_SIZE);
     if (out == NULL) {
