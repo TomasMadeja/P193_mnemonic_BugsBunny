@@ -25,7 +25,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
  * @brief mnemonic_to_seed
  * @param mnemonic     mnemonic phrase
  * @param mnemonic_l   length of mnemonic phrase
- * @param passphrase   passphrase
+ * @param passphrase   passphrase. If set to NULL, default passphrase "" used.
  * @param passphrase_l length of passphrase
  * @param seed         stores pointer to allocated memory containing seed
  * @return 0 in case of success, negative error code otherwise
@@ -52,6 +52,10 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
                         unsigned char **entropy,
                         size_t *entropy_l);
 
+/**
+ * @brief init_mnemonics Initializes mnemonics library
+ * @return 0 in case of success
+ */
 int init_mnemonics(void);
 
 #endif //MNEMONICS_H

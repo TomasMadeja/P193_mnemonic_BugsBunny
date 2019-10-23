@@ -4,29 +4,35 @@
 #include <string.h>
 
 #include <openssl/evp.h>
-#include <openssl/sha.h>
 
+#include "errorcodes.h"
 #include "mnemonics.h"
+
+#define SHA2_BLOCK_SIZE 128
+#define SHA512_DIGEST_SIZE 64
+
 
 int init_mnemonics(void) {
     OpenSSL_add_all_algorithms();
-    return 0;
+    return EC_OK;
 }
 
 int append_sha256_bytes(unsigned char *bytes, size_t entropy_l) {
 
-    unsigned char hash[32];
+    #define SHA256_DIGEST_SIZE 32
+
+    unsigned char hash[SHA256_DIGEST_SIZE];
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
-    if (EVP_DigestInit(ctx, EVP_sha256()) != 1) return -1;
-    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return -1;
-    if (EVP_DigestFinal(ctx, hash, NULL) != 1) return -1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return EC_OPENSSL_ERROR;
+    if (EVP_DigestInit(ctx, EVP_sha256()) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestUpdate(ctx, bytes, entropy_l) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestFinal(ctx, hash, NULL) != 1) return EC_OPENSSL_ERROR;
 
     EVP_MD_CTX_destroy(ctx);
 
-    memcpy(bytes + entropy_l, hash, 1);
+    bytes[entropy_l] = hash[0];
 
-    return 0;
+    return EC_OK;
 }
 
 int entropy_to_mnemonic(const struct dictionary *dictionary,
@@ -34,8 +40,15 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
+    if (entropy == NULL) {
+        return EC_NULL_POINTER;
+    }
     if (entropy_l % 4 != 0) {
-        return -1;
+        return EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4;
+    }
+
+    if (entropy_l < 16 || entropy_l > 32) {
+        return EC_ENTROPY_LENGTH_NOT_WITHIN_16_32;
     }
 
     const struct dictionary *dict = dictionary;
@@ -45,15 +58,26 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     }
 
     unsigned char *bytes = malloc(entropy_l + 1);
-    memcpy(bytes, entropy, entropy_l);
+    if (bytes == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    if(memcpy_s(bytes, entropy_l, entropy, entropy_l) != 0) {
+        free(bytes);
+        return EC_ALLOCATION_ERROR;
+    }
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
-        return -1;
+        return EC_OPENSSL_ERROR;
     }
 
     size_t capacity = 256;
     size_t len = 0;
     unsigned char* out = malloc(capacity);
+    if (out == NULL) {
+        free(bytes);
+        return EC_ALLOCATION_ERROR;
+    }
 
     size_t bits = 0;
     while (bits < entropy_l * 8 + entropy_l * 8 / 32) {
@@ -73,7 +97,13 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
 
         if (len + strlen((char*) (dict->words[joint])) + 1 >= capacity) {
             capacity *= 2;
-            out = realloc(out, capacity);
+            unsigned char *temp = realloc(out, capacity);
+            if (temp == NULL) {
+                free(bytes);
+                free(out);
+                return EC_ALLOCATION_ERROR;
+            }
+            out = temp;
         }
         sprintf((char*) out + len, "%s", dict->words[joint]);
         len += strlen((char*) (dict->words[joint]));
@@ -84,19 +114,19 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     *output = out;
     free(bytes);
 
-    return 0;
+    return (int) len;
 }
 
 int sha512(const unsigned char *message, size_t message_l, unsigned char *out) {
 
     EVP_MD_CTX *ctx;
-    if ((ctx = EVP_MD_CTX_create()) == NULL) return -1;
-    if (EVP_DigestInit(ctx, EVP_sha512()) != 1) return -1;
-    if (EVP_DigestUpdate(ctx, message, message_l) != 1) return -1;
-    if (EVP_DigestFinal(ctx, out, NULL) != 1) return -1;
+    if ((ctx = EVP_MD_CTX_create()) == NULL) return EC_OPENSSL_ERROR;
+    if (EVP_DigestInit(ctx, EVP_sha512()) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestUpdate(ctx, message, message_l) != 1) return EC_OPENSSL_ERROR;
+    if (EVP_DigestFinal(ctx, out, NULL) != 1) return EC_OPENSSL_ERROR;
 
     EVP_MD_CTX_destroy(ctx);
-    return 0;
+    return EC_OK;
 }
 
 void array_128_pad(unsigned char array[128], unsigned char pad) {
@@ -109,35 +139,72 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
                 const unsigned char *message, size_t message_l,
                 unsigned char *out) {
 
-    unsigned char key_ipad[128];
-    unsigned char key_opad[128];
+    #define IPAD 0x36
+    #define OPAD 0x5c
 
-    if (key_l <= 128) {
-        memcpy(key_ipad, key, key_l);
-        memset(key_ipad + key_l, 0, 128 - key_l);
+    unsigned char key_ipad[SHA2_BLOCK_SIZE];
+    unsigned char key_opad[SHA2_BLOCK_SIZE];
+
+    int ret = 0;
+
+    if (key_l <= SHA2_BLOCK_SIZE) {
+        if (memcpy_s(key_ipad, key_l, key, key_l) != 0) {
+            return EC_ALLOCATION_ERROR;
+        }
+        memset(key_ipad + key_l, 0, SHA2_BLOCK_SIZE - key_l);
     } else {
-        sha512(key, key_l, key_ipad);
+        ret = sha512(key, key_l, key_ipad);
+        if (ret != EC_OK) {
+            return ret;
+        }
     }
-    memcpy(key_opad, key_ipad, 128);
+    if (memcpy_s(key_opad, SHA2_BLOCK_SIZE, key_ipad, SHA2_BLOCK_SIZE) != 0) {
+        return EC_ALLOCATION_ERROR;
+    }
 
 
-    array_128_pad(key_ipad, 0x36);
-    array_128_pad(key_opad, 0x5c);
+    array_128_pad(key_ipad, IPAD);
+    array_128_pad(key_opad, OPAD);
 
-    unsigned char *digest_inner = malloc(message_l + 128);
-    unsigned char *digest_outer = malloc(192);
+    unsigned char *digest_inner = malloc(message_l + SHA2_BLOCK_SIZE);
+    if (digest_inner == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
+    unsigned char *digest_outer = malloc(SHA2_BLOCK_SIZE + SHA512_DIGEST_SIZE);
+    if (digest_outer == NULL) {
+        free(digest_inner);
+        return EC_ALLOCATION_ERROR;
+    }
 
-    memcpy(digest_inner, key_ipad, 128);
-    memcpy(digest_inner + 128, message, message_l);
+    if (memcpy_s(digest_inner, SHA2_BLOCK_SIZE, key_ipad, SHA2_BLOCK_SIZE) != 0) {
+        free(digest_inner);
+        free(digest_outer);
+        return EC_ALLOCATION_ERROR;
+    }
+    if (memcpy_s(digest_inner + SHA2_BLOCK_SIZE, message_l, message, message_l) != 0) {
+        free(digest_inner);
+        free(digest_outer);
+        return EC_ALLOCATION_ERROR;
+    }
 
-    sha512(digest_inner, message_l + 128, digest_outer + 128);
-    memcpy(digest_outer, key_opad, 128);
+    ret = sha512(digest_inner, message_l + SHA2_BLOCK_SIZE, digest_outer + SHA2_BLOCK_SIZE);
+    if (ret != EC_OK) {
+        free(digest_inner);
+        free(digest_outer);
+        return ret;
+    }
 
-    sha512(digest_outer, 192, out);
+    if (memcpy_s(digest_outer, SHA2_BLOCK_SIZE, key_opad, SHA2_BLOCK_SIZE) != 0) {
+        free(digest_inner);
+        free(digest_outer);
+        return EC_ALLOCATION_ERROR;
+    }
+
+    ret = sha512(digest_outer, SHA2_BLOCK_SIZE + SHA512_DIGEST_SIZE, out);
 
     free(digest_inner);
     free(digest_outer);
-    return 0;
+    return ret;
 }
 
 void array_64_xor(uint8_t dst[64], uint8_t src[64]) {
@@ -150,25 +217,49 @@ int pbkdf2_hmac_sha512_2048(const unsigned char *input, size_t input_l,
                             const unsigned char *salt, size_t salt_l,
                             unsigned char *out) {
 
-    unsigned char dk[64];
-    unsigned char u[64];
-    unsigned char *salt_and_int = malloc(salt_l + 4);
-    memcpy(salt_and_int, salt, salt_l);
-    memcpy(salt_and_int + salt_l, "\x00\x00\x00\x01", 4);
+    #define BIG_ENDIAN_ZERO "\x00\x00\x00\x01"
+    #define ROUNDS 2048
 
-    hmac_sha512(input, input_l, salt_and_int, salt_l + 4, dk);
+    unsigned char dk[SHA512_DIGEST_SIZE];
+    unsigned char u[SHA512_DIGEST_SIZE];
+    unsigned char *salt_and_int = malloc(salt_l + 4);
+    if (salt_and_int == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    if (memcpy_s(salt_and_int, salt_l, salt, salt_l) != 0) {
+        return EC_ALLOCATION_ERROR;
+    }
+    if (memcpy_s(salt_and_int + salt_l, 4, BIG_ENDIAN_ZERO, 4) != 0) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    int ret = 0;
+
+    ret = hmac_sha512(input, input_l, salt_and_int, salt_l + 4, dk);
     free(salt_and_int);
 
-    memcpy(u, dk, 64);
+    if (ret != 0) {
+        return ret;
+    }
 
-    for (uint16_t i = 0; i < 2047; i++) {
-        hmac_sha512(input, input_l, u, 64, u);
+    if (memcpy_s(u, SHA512_DIGEST_SIZE, dk, SHA512_DIGEST_SIZE) != 0) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    for (uint16_t i = 0; i < ROUNDS - 1; i++) {
+        ret = hmac_sha512(input, input_l, u, SHA512_DIGEST_SIZE, u);
+        if (ret != 0) {
+            return ret;
+        }
         array_64_xor(dk, u);
     }
 
-    memcpy(out, dk, 64);
+    if (memcpy_s(out, SHA512_DIGEST_SIZE, dk, SHA512_DIGEST_SIZE) != 0) {
+        return EC_ALLOCATION_ERROR;
+    }
 
-    return 0;
+    return EC_OK;
 }
 
 int mnemonic_to_seed(const unsigned char *mnemonic,
@@ -177,16 +268,46 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t passphrase_l,
                      unsigned char **seed) {
 
-    unsigned char *salt = malloc(passphrase_l + 8);
-    memcpy(salt, "mnemonic", 8);
-    memcpy(salt + 8, passphrase, passphrase_l);
-    unsigned char *out = malloc(64);
+    if (mnemonic == NULL) {
+        return EC_NULL_POINTER;
+    }
 
-    pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, passphrase_l + 8, out);
+    const unsigned char *pass = passphrase;
+    size_t pass_l = passphrase_l;
+
+    if (passphrase == NULL) {
+        pass = (const unsigned char*) "";
+        pass_l = 0;
+    }
+
+    unsigned char *salt = malloc(pass_l + 8);
+    if (salt == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
+
+    if (memcpy_s(salt, 8, "mnemonic", 8) != 0 ||
+        memcpy_s(salt + 8, pass_l, pass, pass_l) != 0) {
+        free(salt);
+        return EC_ALLOCATION_ERROR;
+    }
+
+    unsigned char *out = malloc(SHA512_DIGEST_SIZE);
+    if (out == NULL) {
+        free(salt);
+        return EC_ALLOCATION_ERROR;
+    }
+
+    int ret = pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, passphrase_l + 8, out);
 
     free(salt);
+
+    if (ret != 0) {
+        free(out);
+        return ret;
+    }
+
     *seed = out;
-    return 0;
+    return EC_OK;
 }
 
 uint8_t next_word_size(const unsigned char *string) {
@@ -215,6 +336,10 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
                         size_t mnemonic_l,
                         unsigned char **entropy,
                         size_t *entropy_l) {
+
+    if (mnemonic == NULL) {
+        return EC_NULL_POINTER;
+    }
 
     const struct dictionary *dict = dictionary;
 
@@ -246,6 +371,9 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
     }
 
     unsigned char *out = malloc(*entropy_l);
+    if (out == NULL) {
+        return EC_ALLOCATION_ERROR;
+    }
 
     for (size_t i = 0; i < *entropy_l; i++) {
         size_t bits = 8 * i;
@@ -257,5 +385,5 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
     }
 
     *entropy = out;
-    return 0;
+    return EC_OK;
 }
