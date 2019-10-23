@@ -30,8 +30,8 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -43,7 +43,8 @@ START_TEST (vector_0_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_0_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -54,13 +55,13 @@ START_TEST (vector_0_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -70,7 +71,7 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_0_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_0_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -84,7 +85,7 @@ START_TEST (vector_0_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -95,7 +96,8 @@ START_TEST (vector_0_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_0_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -128,8 +130,8 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -141,7 +143,8 @@ START_TEST (vector_1_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_1_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -152,13 +155,13 @@ START_TEST (vector_1_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -168,7 +171,7 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_1_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_1_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -182,7 +185,7 @@ START_TEST (vector_1_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -193,7 +196,8 @@ START_TEST (vector_1_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_1_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -226,8 +230,8 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -239,7 +243,8 @@ START_TEST (vector_2_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_2_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -250,13 +255,13 @@ START_TEST (vector_2_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -266,7 +271,7 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_2_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_2_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -280,7 +285,7 @@ START_TEST (vector_2_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -291,7 +296,8 @@ START_TEST (vector_2_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_2_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -324,8 +330,8 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -337,7 +343,8 @@ START_TEST (vector_3_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_3_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -348,13 +355,13 @@ START_TEST (vector_3_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -364,7 +371,7 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_3_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_3_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -378,7 +385,7 @@ START_TEST (vector_3_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -389,7 +396,8 @@ START_TEST (vector_3_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_3_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -422,8 +430,8 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -435,7 +443,8 @@ START_TEST (vector_4_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_4_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -446,13 +455,13 @@ START_TEST (vector_4_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -462,7 +471,7 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_4_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_4_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -476,7 +485,7 @@ START_TEST (vector_4_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -487,7 +496,8 @@ START_TEST (vector_4_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_4_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -520,8 +530,8 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -533,7 +543,8 @@ START_TEST (vector_5_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_5_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -544,13 +555,13 @@ START_TEST (vector_5_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -560,7 +571,7 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_5_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_5_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -574,7 +585,7 @@ START_TEST (vector_5_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -585,7 +596,8 @@ START_TEST (vector_5_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_5_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -618,8 +630,8 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -631,7 +643,8 @@ START_TEST (vector_6_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_6_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -642,13 +655,13 @@ START_TEST (vector_6_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -658,7 +671,7 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_6_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_6_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -672,7 +685,7 @@ START_TEST (vector_6_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -683,7 +696,8 @@ START_TEST (vector_6_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_6_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -716,8 +730,8 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -729,7 +743,8 @@ START_TEST (vector_7_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_7_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -740,13 +755,13 @@ START_TEST (vector_7_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -756,7 +771,7 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_7_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_7_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -770,7 +785,7 @@ START_TEST (vector_7_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -781,7 +796,8 @@ START_TEST (vector_7_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_7_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -814,8 +830,8 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -827,7 +843,8 @@ START_TEST (vector_8_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_8_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -838,13 +855,13 @@ START_TEST (vector_8_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -854,7 +871,7 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_8_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_8_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -868,7 +885,7 @@ START_TEST (vector_8_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -879,7 +896,8 @@ START_TEST (vector_8_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_8_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -912,8 +930,8 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -925,7 +943,8 @@ START_TEST (vector_9_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_9_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -936,13 +955,13 @@ START_TEST (vector_9_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -952,7 +971,7 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_9_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_9_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -966,7 +985,7 @@ START_TEST (vector_9_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -977,7 +996,8 @@ START_TEST (vector_9_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_9_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1010,8 +1030,8 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1023,7 +1043,8 @@ START_TEST (vector_10_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_10_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1034,13 +1055,13 @@ START_TEST (vector_10_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1050,7 +1071,7 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_10_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_10_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1064,7 +1085,7 @@ START_TEST (vector_10_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1075,7 +1096,8 @@ START_TEST (vector_10_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_10_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1108,8 +1130,8 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1121,7 +1143,8 @@ START_TEST (vector_11_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_11_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1132,13 +1155,13 @@ START_TEST (vector_11_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1148,7 +1171,7 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_11_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_11_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1162,7 +1185,7 @@ START_TEST (vector_11_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1173,7 +1196,8 @@ START_TEST (vector_11_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_11_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1206,8 +1230,8 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1219,7 +1243,8 @@ START_TEST (vector_12_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_12_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1230,13 +1255,13 @@ START_TEST (vector_12_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1246,7 +1271,7 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_12_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_12_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1260,7 +1285,7 @@ START_TEST (vector_12_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1271,7 +1296,8 @@ START_TEST (vector_12_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_12_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1304,8 +1330,8 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1317,7 +1343,8 @@ START_TEST (vector_13_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_13_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1328,13 +1355,13 @@ START_TEST (vector_13_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1344,7 +1371,7 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_13_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_13_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1358,7 +1385,7 @@ START_TEST (vector_13_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1369,7 +1396,8 @@ START_TEST (vector_13_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_13_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1402,8 +1430,8 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1415,7 +1443,8 @@ START_TEST (vector_14_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_14_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1426,13 +1455,13 @@ START_TEST (vector_14_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1442,7 +1471,7 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_14_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_14_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1456,7 +1485,7 @@ START_TEST (vector_14_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1467,7 +1496,8 @@ START_TEST (vector_14_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_14_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1500,8 +1530,8 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1513,7 +1543,8 @@ START_TEST (vector_15_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_15_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1524,13 +1555,13 @@ START_TEST (vector_15_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1540,7 +1571,7 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_15_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_15_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1554,7 +1585,7 @@ START_TEST (vector_15_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1565,7 +1596,8 @@ START_TEST (vector_15_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_15_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1598,8 +1630,8 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1611,7 +1643,8 @@ START_TEST (vector_16_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_16_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1622,13 +1655,13 @@ START_TEST (vector_16_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1638,7 +1671,7 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_16_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_16_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1652,7 +1685,7 @@ START_TEST (vector_16_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1663,7 +1696,8 @@ START_TEST (vector_16_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_16_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1696,8 +1730,8 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1709,7 +1743,8 @@ START_TEST (vector_17_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_17_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1720,13 +1755,13 @@ START_TEST (vector_17_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1736,7 +1771,7 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_17_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_17_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1750,7 +1785,7 @@ START_TEST (vector_17_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1761,7 +1796,8 @@ START_TEST (vector_17_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_17_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1794,8 +1830,8 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1807,7 +1843,8 @@ START_TEST (vector_18_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_18_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1818,13 +1855,13 @@ START_TEST (vector_18_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1834,7 +1871,7 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_18_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_18_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1848,7 +1885,7 @@ START_TEST (vector_18_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1859,7 +1896,8 @@ START_TEST (vector_18_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_18_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1892,8 +1930,8 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -1905,7 +1943,8 @@ START_TEST (vector_19_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_19_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -1916,13 +1955,13 @@ START_TEST (vector_19_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -1932,7 +1971,7 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_19_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_19_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -1946,7 +1985,7 @@ START_TEST (vector_19_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -1957,7 +1996,8 @@ START_TEST (vector_19_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_19_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -1990,8 +2030,8 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -2003,7 +2043,8 @@ START_TEST (vector_20_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_20_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -2014,13 +2055,13 @@ START_TEST (vector_20_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -2030,7 +2071,7 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_20_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_20_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -2044,7 +2085,7 @@ START_TEST (vector_20_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -2055,7 +2096,8 @@ START_TEST (vector_20_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_20_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -2088,8 +2130,8 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -2101,7 +2143,8 @@ START_TEST (vector_21_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_21_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -2112,13 +2155,13 @@ START_TEST (vector_21_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -2128,7 +2171,7 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_21_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_21_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -2142,7 +2185,7 @@ START_TEST (vector_21_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -2153,7 +2196,8 @@ START_TEST (vector_21_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_21_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -2186,8 +2230,8 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -2199,7 +2243,8 @@ START_TEST (vector_22_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_22_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -2210,13 +2255,13 @@ START_TEST (vector_22_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -2226,7 +2271,7 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_22_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_22_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -2240,7 +2285,7 @@ START_TEST (vector_22_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -2251,7 +2296,8 @@ START_TEST (vector_22_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_22_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -2284,8 +2330,8 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err == 0,
-        "entropy_to_mnemonic nonzero error code %d",
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
         err
     );
 
@@ -2297,7 +2343,8 @@ START_TEST (vector_23_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_23_M_LEN,
-        "Output mnemonic size didn't match."
+        "Output mnemonic size didn't match = %d.",
+        mnemonic_l
     );
 
     ck_assert_msg(
@@ -2308,13 +2355,13 @@ START_TEST (vector_23_en)
     unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic, mnemonic_l,
-        VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
         &seed
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_seed nonzero error code %d.",
+        "mnemonic_to_seed nonzero error code = %d.",
         err
     );
 
@@ -2324,7 +2371,7 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        memcmp(seed, seed_ref, VECTOR_23_M_LEN) == 0,
+        memcmp(seed, seed_ref, VECTOR_23_S_LEN) == 0,
         "Output seed didn't match."
     );
 
@@ -2338,7 +2385,7 @@ START_TEST (vector_23_en)
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code %d.",
+        "mnemonic_to_entropy nonzero error code = %d.",
         err
     );
 
@@ -2349,7 +2396,8 @@ START_TEST (vector_23_en)
 
     ck_assert_msg(
         s_entropy_l == VECTOR_23_E_LEN,
-        "Output entropy size didn't match."
+        "Output entropy size didn't match = %d.",
+        s_entropy_l
     );
 
     ck_assert_msg(
@@ -2358,6 +2406,8 @@ START_TEST (vector_23_en)
     );
 }
 END_TEST
+
+
 
 
 
