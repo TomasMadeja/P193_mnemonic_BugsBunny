@@ -9,8 +9,9 @@
  * @param file        File to print information to.
  *                    Defaults to stderr in case of NULL pointer.
  * @param error_code  Error code to parse
+ * @return 0 on success, negative error code otherwise
  */
-void parse_error(FILE *file, int error_code);
+int parse_error(FILE *file, int error_code);
 
 
 #define EC_OK 0
@@ -19,6 +20,7 @@ void parse_error(FILE *file, int error_code);
 #define EC_OPENSSL_ERROR -2
 #define EC_ALLOCATION_ERROR -3
 #define EC_NULL_POINTER -4
+#define EC_IO_ERROR -5
 
 #define EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4 -20
 #define EC_ENTROPY_LENGTH_NOT_WITHIN_16_32 -21
