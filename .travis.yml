@@ -9,11 +9,20 @@ matrix:
         - echo "Windows"
     - os: linux
       dist: xenial
-      before_install:
-        - sudo apt-get update -qq
-      install:
-        - sudo apt install gcc-9 openssl check
+      complier:
+        - gcc 
+      addons:
+        apt:
+          packages:
+            - openssl
+            - valgrind
+            - check
+            - make
+            - cmake
+            - lcov
+            - doxygen
+            - help2man
       script:
         - echo "UP"
-        - gcc-9 -std=c11 -g -ftest-coverage -o test_vectors -I./src/ -I./tests/ src/errorcodes.h src/errorcodes.c src/dictionary.c src/dictionary.h src/mnemonics.h src/mnemonics.c tests/test_mnemonics.c -lcrypto -lcheck -lpthread -lm -lrt -lsubunit
+        - gcc -std=c11 -g -ftest-coverage -o test_vectors -I./src/ -I./tests/ src/errorcodes.h src/errorcodes.c src/dictionary.c src/dictionary.h src/mnemonics.h src/mnemonics.c tests/test_mnemonics.c -lcrypto -lcheck -lpthread -lm -lrt -lsubunit
         - ./test_vectors
