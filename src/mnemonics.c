@@ -152,6 +152,7 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
         if (ret != EC_OK) {
             return ret;
         }
+        memset(key_ipad + SHA512_DIGEST_SIZE, 0, SHA512_DIGEST_SIZE);
     }
     memcpy(key_opad, key_ipad, SHA2_BLOCK_SIZE);
 
@@ -292,11 +293,17 @@ uint8_t next_word_size(const unsigned char *string) {
 
 int strcmp_to_space(const void *a, const void *b) {
     size_t i = 0;
+    size_t j = 0;
     const unsigned char *x = *((const unsigned char* const*) a);
     const unsigned char *y = *((const unsigned char* const*) b);
-    while (x[i] != ' ' && x[i] != '\0' &&
-           y[i] != ' ' && y[i] != '\0') {
+    while (x[i] != '\0' && x[i] != ' ') {
         i++;
+    }
+    while (y[j] != '\0' && y[j] != ' ') {
+        j++;
+    }
+    if (j > i) {
+        i = j;
     }
     return strncmp((const char*) x, (const char*) y, i);
 }
