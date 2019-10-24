@@ -24,5 +24,10 @@ matrix:
             - help2man
       script:
         - echo "UP"
-        - gcc -std=c11 -g -ftest-coverage -o test_vectors -I./src/ -I./tests/ src/errorcodes.h src/errorcodes.c src/dictionary.c src/dictionary.h src/mnemonics.h src/mnemonics.c tests/test_mnemonics.c -lcrypto -lcheck -lpthread -lm -lrt -lsubunit
-        - ./test_vectors
+        - gcc -std=c11 -g -ftest-coverage -o tests_mnemonics -I./src/ -I./tests/ src/errorcodes.h src/errorcodes.c src/dictionary.c src/dictionary.h src/mnemonics.h src/mnemonics.c tests/test_mnemonics.c -lcrypto -lcheck -lpthread -lm -lrt -lsubunit
+        - ./tests_mnemonics
+        - valgrind error-exitcode=1 --leak-check=full --show-leak-kinds=all ./tests_mnemonics
+        - cppcheck --error-exitcode=1 --enable=warning,performance,information,style ./src/*.c ./src/*.h
+        - lcov --directory . --capture --output-file coverage.info
+        - lcov --list coverage.info
+        
