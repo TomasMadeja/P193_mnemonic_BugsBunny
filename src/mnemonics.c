@@ -152,6 +152,7 @@ int hmac_sha512(const unsigned char *key, size_t key_l,
         if (ret != EC_OK) {
             return ret;
         }
+        memset(key_ipad + SHA512_DIGEST_SIZE, 0, SHA512_DIGEST_SIZE);
     }
     memcpy(key_opad, key_ipad, SHA2_BLOCK_SIZE);
 
