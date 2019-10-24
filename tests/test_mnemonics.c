@@ -104,6 +104,10 @@ START_TEST (vector_0_en)
         memcmp(s_entropy, entropy, VECTOR_0_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -204,6 +208,10 @@ START_TEST (vector_1_en)
         memcmp(s_entropy, entropy, VECTOR_1_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -304,6 +312,10 @@ START_TEST (vector_2_en)
         memcmp(s_entropy, entropy, VECTOR_2_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -404,6 +416,10 @@ START_TEST (vector_3_en)
         memcmp(s_entropy, entropy, VECTOR_3_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -504,6 +520,10 @@ START_TEST (vector_4_en)
         memcmp(s_entropy, entropy, VECTOR_4_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -604,6 +624,10 @@ START_TEST (vector_5_en)
         memcmp(s_entropy, entropy, VECTOR_5_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -704,6 +728,10 @@ START_TEST (vector_6_en)
         memcmp(s_entropy, entropy, VECTOR_6_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -804,6 +832,10 @@ START_TEST (vector_7_en)
         memcmp(s_entropy, entropy, VECTOR_7_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -904,6 +936,10 @@ START_TEST (vector_8_en)
         memcmp(s_entropy, entropy, VECTOR_8_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1004,6 +1040,10 @@ START_TEST (vector_9_en)
         memcmp(s_entropy, entropy, VECTOR_9_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1104,6 +1144,10 @@ START_TEST (vector_10_en)
         memcmp(s_entropy, entropy, VECTOR_10_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1204,6 +1248,10 @@ START_TEST (vector_11_en)
         memcmp(s_entropy, entropy, VECTOR_11_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1304,6 +1352,10 @@ START_TEST (vector_12_en)
         memcmp(s_entropy, entropy, VECTOR_12_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1404,6 +1456,10 @@ START_TEST (vector_13_en)
         memcmp(s_entropy, entropy, VECTOR_13_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1504,6 +1560,10 @@ START_TEST (vector_14_en)
         memcmp(s_entropy, entropy, VECTOR_14_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1604,6 +1664,10 @@ START_TEST (vector_15_en)
         memcmp(s_entropy, entropy, VECTOR_15_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1704,6 +1768,10 @@ START_TEST (vector_16_en)
         memcmp(s_entropy, entropy, VECTOR_16_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1804,6 +1872,10 @@ START_TEST (vector_17_en)
         memcmp(s_entropy, entropy, VECTOR_17_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -1904,6 +1976,10 @@ START_TEST (vector_18_en)
         memcmp(s_entropy, entropy, VECTOR_18_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -2004,6 +2080,10 @@ START_TEST (vector_19_en)
         memcmp(s_entropy, entropy, VECTOR_19_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -2104,6 +2184,10 @@ START_TEST (vector_20_en)
         memcmp(s_entropy, entropy, VECTOR_20_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -2204,6 +2288,10 @@ START_TEST (vector_21_en)
         memcmp(s_entropy, entropy, VECTOR_21_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -2304,6 +2392,10 @@ START_TEST (vector_22_en)
         memcmp(s_entropy, entropy, VECTOR_22_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
 
@@ -2404,11 +2496,12 @@ START_TEST (vector_23_en)
         memcmp(s_entropy, entropy, VECTOR_23_E_LEN) == 0,
         "Output entropy didn't match."
     );
+
+    free(mnemonic);
+    free(seed);
+    free(s_entropy);
 }
 END_TEST
-
-
-
 
 
 Suite * mnemonics_test_suite(void)
