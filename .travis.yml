@@ -9,5 +9,11 @@ matrix:
         - echo "Windows"
     - os: linux
       dist: xenial
+      before_install:
+        - sudo apt-get update -qq
+      install:
+        - sudo apt install gcc-9 openssl check
       script:
-        - echo "Linux"
+        - echo "UP"
+        - gcc-9 -std=c11 -g -ftest-coverage -o test_vectors -I./src/ -I./tests/ src/errorcodes.h src/errorcodes.c src/dictionary.c src/dictionary.h src/mnemonics.h src/mnemonics.c tests/test_mnemonics.c -lcrypto -lcheck -lpthread -lm -lrt -lsubunit
+        - ./test_vectors
