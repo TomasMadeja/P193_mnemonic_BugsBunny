@@ -43,7 +43,7 @@ START_TEST (vector_0_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_0_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -79,13 +79,13 @@ START_TEST (vector_0_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_0_E_LEN,
+        mnemonic_ref, VECTOR_0_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -143,7 +143,7 @@ START_TEST (vector_1_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_1_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -179,13 +179,13 @@ START_TEST (vector_1_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_1_E_LEN,
+        mnemonic_ref, VECTOR_1_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -243,7 +243,7 @@ START_TEST (vector_2_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_2_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -279,13 +279,13 @@ START_TEST (vector_2_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_2_E_LEN,
+        mnemonic_ref, VECTOR_2_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -343,7 +343,7 @@ START_TEST (vector_3_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_3_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -379,13 +379,13 @@ START_TEST (vector_3_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_3_E_LEN,
+        mnemonic_ref, VECTOR_3_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -443,7 +443,7 @@ START_TEST (vector_4_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_4_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -479,13 +479,13 @@ START_TEST (vector_4_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_4_E_LEN,
+        mnemonic_ref, VECTOR_4_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -543,7 +543,7 @@ START_TEST (vector_5_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_5_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -579,13 +579,13 @@ START_TEST (vector_5_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_5_E_LEN,
+        mnemonic_ref, VECTOR_5_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -643,7 +643,7 @@ START_TEST (vector_6_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_6_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -679,13 +679,13 @@ START_TEST (vector_6_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_6_E_LEN,
+        mnemonic_ref, VECTOR_6_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -743,7 +743,7 @@ START_TEST (vector_7_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_7_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -779,13 +779,13 @@ START_TEST (vector_7_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_7_E_LEN,
+        mnemonic_ref, VECTOR_7_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -843,7 +843,7 @@ START_TEST (vector_8_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_8_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -879,13 +879,13 @@ START_TEST (vector_8_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_8_E_LEN,
+        mnemonic_ref, VECTOR_8_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -943,7 +943,7 @@ START_TEST (vector_9_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_9_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -979,13 +979,13 @@ START_TEST (vector_9_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_9_E_LEN,
+        mnemonic_ref, VECTOR_9_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1043,7 +1043,7 @@ START_TEST (vector_10_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_10_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1079,13 +1079,13 @@ START_TEST (vector_10_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_10_E_LEN,
+        mnemonic_ref, VECTOR_10_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1143,7 +1143,7 @@ START_TEST (vector_11_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_11_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1179,13 +1179,13 @@ START_TEST (vector_11_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_11_E_LEN,
+        mnemonic_ref, VECTOR_11_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1243,7 +1243,7 @@ START_TEST (vector_12_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_12_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1279,13 +1279,13 @@ START_TEST (vector_12_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_12_E_LEN,
+        mnemonic_ref, VECTOR_12_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1343,7 +1343,7 @@ START_TEST (vector_13_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_13_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1379,13 +1379,13 @@ START_TEST (vector_13_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_13_E_LEN,
+        mnemonic_ref, VECTOR_13_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1443,7 +1443,7 @@ START_TEST (vector_14_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_14_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1479,13 +1479,13 @@ START_TEST (vector_14_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_14_E_LEN,
+        mnemonic_ref, VECTOR_14_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1543,7 +1543,7 @@ START_TEST (vector_15_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_15_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1579,13 +1579,13 @@ START_TEST (vector_15_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_15_E_LEN,
+        mnemonic_ref, VECTOR_15_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1643,7 +1643,7 @@ START_TEST (vector_16_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_16_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1679,13 +1679,13 @@ START_TEST (vector_16_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_16_E_LEN,
+        mnemonic_ref, VECTOR_16_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1743,7 +1743,7 @@ START_TEST (vector_17_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_17_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1779,13 +1779,13 @@ START_TEST (vector_17_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_17_E_LEN,
+        mnemonic_ref, VECTOR_17_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1843,7 +1843,7 @@ START_TEST (vector_18_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_18_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1879,13 +1879,13 @@ START_TEST (vector_18_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_18_E_LEN,
+        mnemonic_ref, VECTOR_18_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -1943,7 +1943,7 @@ START_TEST (vector_19_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_19_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -1979,13 +1979,13 @@ START_TEST (vector_19_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_19_E_LEN,
+        mnemonic_ref, VECTOR_19_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -2043,7 +2043,7 @@ START_TEST (vector_20_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_20_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -2079,13 +2079,13 @@ START_TEST (vector_20_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_20_E_LEN,
+        mnemonic_ref, VECTOR_20_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -2143,7 +2143,7 @@ START_TEST (vector_21_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_21_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -2179,13 +2179,13 @@ START_TEST (vector_21_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_21_E_LEN,
+        mnemonic_ref, VECTOR_21_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -2243,7 +2243,7 @@ START_TEST (vector_22_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_22_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -2279,13 +2279,13 @@ START_TEST (vector_22_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_22_E_LEN,
+        mnemonic_ref, VECTOR_22_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
@@ -2343,7 +2343,7 @@ START_TEST (vector_23_en)
     size_t mnemonic_l = strlen((char *) mnemonic);
     ck_assert_msg(
         mnemonic_l == VECTOR_23_M_LEN,
-        "Output mnemonic size didn't match = %d.",
+        "Output mnemonic size didn't match = %llu.",
         mnemonic_l
     );
 
@@ -2379,13 +2379,13 @@ START_TEST (vector_23_en)
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, VECTOR_23_E_LEN,
+        mnemonic_ref, VECTOR_23_M_LEN,
         &s_entropy, &s_entropy_l
     );
 
     ck_assert_msg(
         err == 0,
-        "mnemonic_to_entropy nonzero error code = %d.",
+        "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
 
