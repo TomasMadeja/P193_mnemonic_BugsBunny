@@ -17,6 +17,7 @@ matrix:
             - openssl
             - valgrind
             - check
+            - cppcheck
             - make
             - cmake
             - lcov
