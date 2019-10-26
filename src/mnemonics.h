@@ -1,10 +1,10 @@
 #ifndef MNEMONICS_H
 #define MNEMONICS_H
 
-
 #include <stdlib.h>
 
 #include "dictionary.h"
+
 
 /**
  * @brief entropy_to_mnemonic
@@ -13,7 +13,8 @@
  * @param entropy    16 to 32 bytes of entropy, must be multiple of 4
  * @param entropy_l  length of entropy
  * @param output     stores pointer to allocated memory containing mnemonic
- * @return 0 in case of success, error code otherwise
+ * @return           length of mnemonic phrase in characters 
+ *                   or negative error code in case of failure
  */
 int entropy_to_mnemonic(const struct dictionary *dictionary,
                         const unsigned char *entropy,
@@ -24,10 +25,10 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
  * @brief mnemonic_to_seed
  * @param mnemonic     mnemonic phrase
  * @param mnemonic_l   length of mnemonic phrase
- * @param passphrase   passphrase
+ * @param passphrase   passphrase. If set to NULL, default passphrase "" used.
  * @param passphrase_l length of passphrase
  * @param seed         stores pointer to allocated memory containing seed
- * @return 0 in case of success, error code otherwise
+ * @return 0 in case of success, negative error code otherwise
  */
 int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t mnemonic_l,
@@ -43,7 +44,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
  * @param mnemonic_l length of mnemonic phrase
  * @param entropy    stores pointer to allocated memory containing memory
  * @param entropy_l  pointer to variable to store size of entropy in bytes
- * @return 0 in case of success, error code otherwise
+ * @return 0 in case of success, negative error code otherwise
  */
 int mnemonic_to_entropy(const struct dictionary *dictionary,
                         const unsigned char *mnemonic,
@@ -51,6 +52,10 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
                         unsigned char **entropy,
                         size_t *entropy_l);
 
+/**
+ * @brief init_mnemonics Initializes mnemonics library
+ * @return 0 in case of success
+ */
 int init_mnemonics(void);
 
 #endif //MNEMONICS_H
