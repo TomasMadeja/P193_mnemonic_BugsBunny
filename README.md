@@ -6,7 +6,7 @@
 
 # bip39 Mnemonic Phrase Generator
 
-[![Build Status](https://travis-ci.org/Trace-Share/Trace-Normalizer.svg?branch=master)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny)
+[![Build Status (dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny.svg?branch=dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny)
 
 # Footer
 
