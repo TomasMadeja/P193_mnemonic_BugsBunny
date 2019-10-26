@@ -366,3 +366,70 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
     *entropy = out;
     return EC_OK;
 }
+
+int entropy_to_mnemonic_seed(const struct dictionary *dictionary,
+                             const unsigned char *entropy,
+                             size_t entropy_l,
+                             const unsigned char *passphrase,
+                             size_t passphrase_l,
+                             unsigned char **mnemonic,
+                             unsigned char **seed) {
+
+    int ret = entropy_to_mnemonic(dictionary, entropy, entropy_l, mnemonic);
+    if (ret <= 0) {
+        return ret;
+    }
+    int ret2 = mnemonic_to_seed(*mnemonic, (size_t) ret, passphrase, passphrase_l,
+                           seed);
+    if (ret2 != EC_OK) {
+        free(*mnemonic);
+        return ret2;
+    }
+
+    return ret;
+}
+
+int mnemonic_to_entropy_seed(const struct dictionary *dictionary,
+                             const unsigned char *mnemonic,
+                             size_t mnemonic_l,
+                             const unsigned char *passphrase,
+                             size_t passphrase_l,
+                             unsigned char **entropy,
+                             size_t *entropy_l,
+                             unsigned char **seed) {
+
+    int ret = mnemonic_to_entropy(dictionary, mnemonic, mnemonic_l,
+                                  entropy, entropy_l);
+    if (ret != EC_OK) {
+        return ret;
+    }
+    ret = mnemonic_to_entropy_seed(dictionary, mnemonic, mnemonic_l,
+                                   passphrase, passphrase_l,
+                                   entropy, entropy_l, seed);
+    if (ret != EC_OK) {
+        free(*entropy);
+    }
+    return ret;
+}
+
+int check_phrase_seed(const unsigned char *mnemonic,
+                      size_t mnemonic_l,
+                      const unsigned char *passphrase,
+                      size_t passphrase_l,
+                      const unsigned char *seed) {
+
+    unsigned char *actual_seed;
+    int ret = mnemonic_to_seed(mnemonic, mnemonic_l,
+                               passphrase, passphrase_l,
+                               &actual_seed);
+    if (ret != EC_OK) {
+        return ret;
+    }
+
+    ret = memcmp(seed, actual_seed, SHA512_DIGEST_SIZE);
+    if (ret != 0) {
+        return EC_PHRASE_DOES_NOT_GENERATE_SEED;
+    }
+
+    return EC_OK;
+}

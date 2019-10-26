@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.7)
 # Project configuration
 project(mnemonics LANGUAGES C)
 
-set(SOURCES mnemonics.c dictionary.c)
+set(SOURCES mnemonics.c dictionary.c errorcodes.c)
 
 find_package(OpenSSL)
 
