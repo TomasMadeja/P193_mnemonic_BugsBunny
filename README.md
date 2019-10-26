@@ -8,6 +8,9 @@
 
 [![Build Status (dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny.svg?branch=dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny)
 
+# Usage
+TODO
+
 # Footer
 
 This project is a part of an assignament for PB193 - Secure coding principles and practices:
