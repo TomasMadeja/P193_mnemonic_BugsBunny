@@ -88,7 +88,9 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
         size_t position = bits / 8;
         uint32_t joint = ((uint32_t) bytes[position]) << 24;
         joint ^= ((uint32_t) bytes[position + 1]) << 16;
-        joint ^= ((uint32_t) bytes[position + 2]) << 8;
+        if (position + 2 < entropy_l + 1) {
+            joint ^= ((uint32_t) bytes[position + 2]) << 8;
+        }
         joint <<= bits % 8;
         joint >>= 32 - 11;
 
