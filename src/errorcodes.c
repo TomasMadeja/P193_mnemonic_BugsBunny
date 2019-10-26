@@ -64,6 +64,13 @@ int parse_error(FILE *file, int error_code) {
         }
         break;
     }
+
+    case EC_PHRASE_DOES_NOT_GENERATE_SEED: {
+        if (fprintf(f, "Provided phrase and seed do not match.\n") != 0) {
+            return EC_IO_ERROR;
+        }
+        break;
+    }
     }
 
     return EC_OK;
