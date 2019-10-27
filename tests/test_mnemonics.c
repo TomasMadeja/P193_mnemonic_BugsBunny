@@ -2690,14 +2690,11 @@ END_TEST
 START_TEST ( to_seed_NULL_pass )
 {
     unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
-    unsigned char seed_ref[] = {
-0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
-    };
 
     int err=0;
     unsigned char* seed;
     err = mnemonic_to_seed(
-        mnemonic_ref, strlen(mnemonic_ref),
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
         NULL, VECTOR_PASSPHRASE_L,
         &seed
     );
@@ -2714,9 +2711,6 @@ END_TEST
 START_TEST ( to_seed_zero_pass )
 {
     unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
-    unsigned char seed_ref[] = {
-0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
-    };
 
     int err=0;
     unsigned char* seed;
@@ -2740,7 +2734,6 @@ START_TEST ( to_seed_NULL_seed )
     unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
 
     int err=0;
-    unsigned char* seed;
     err = mnemonic_to_seed(
         mnemonic_ref, strlen( (char *) mnemonic_ref),
         (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
@@ -2821,11 +2814,10 @@ START_TEST ( to_entropy_NULL_entropy )
     unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
 
     int err=0;
-    unsigned char* s_entropy;
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, strlen(mnemonic_ref),
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
         NULL, &s_entropy_l
     );
 
@@ -2842,10 +2834,9 @@ START_TEST ( to_entropy_NULL_entropy_l )
 
     int err=0;
     unsigned char* s_entropy;
-    size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, strlen(mnemonic_ref),
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
         &s_entropy, NULL
     );
 
@@ -2866,7 +2857,7 @@ START_TEST ( to_entropy_longer_mnemonic )
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, strlen(mnemonic_ref),
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
         &s_entropy, &s_entropy_l
     );
 
@@ -2886,7 +2877,7 @@ START_TEST ( to_entropy_shorter_mnemonic )
     size_t s_entropy_l;
     err = mnemonic_to_entropy(
         NULL,
-        mnemonic_ref, strlen(mnemonic_ref),
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
         &s_entropy, &s_entropy_l
     );
 
