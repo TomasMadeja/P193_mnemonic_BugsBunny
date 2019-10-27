@@ -76,7 +76,15 @@ int check_flags(int argc, char **argv) {
 }
 
 void print_help() {
+    const char help_string[] = "Usage: example flag\n"
+                               "  -h                             Display this help.\n"
+                               "  -m mnemonic_file               Computes the seed from a mnemonic phrase.\n"
+                               "  -e entropy_file                Computes the mnemonic phrase from entropy.\n"
+                               "  -c mnemonic_file entropy_file  Compare the mnemonic and entropy.\n\n"
+                               "Mnemonic files should be text files with a mnemonic phrase.\n"
+                               "Entropy files should be binary.\n";
 
+    printf(help_string);
 }
 
 size_t get_mnemonic(char *file_name, unsigned char *mnemonic) {
