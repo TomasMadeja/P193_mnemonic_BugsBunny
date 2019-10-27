@@ -2863,7 +2863,7 @@ START_TEST ( to_entropy_longer_mnemonic )
 
     ck_assert_msg(
         err != EC_OK,
-        "Error code is nonzero for shorte rmnemonic."
+        "Error code is zero for longer mnemonic."
     );
 }
 END_TEST
@@ -2883,7 +2883,7 @@ START_TEST ( to_entropy_shorter_mnemonic )
 
     ck_assert_msg(
         err != EC_OK,
-        "Error code is nonzero for shorte rmnemonic."
+        "Error code is zero for shorter mnemonic."
     );
 }
 END_TEST
