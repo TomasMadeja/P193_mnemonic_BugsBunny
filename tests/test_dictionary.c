@@ -1,6 +1,7 @@
 #include <check.h>
 #include <string.h>
 
+#include "errorcodes.h"
 #include "dictionary.h"
 
 // dicts

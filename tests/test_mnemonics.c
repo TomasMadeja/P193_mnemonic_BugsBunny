@@ -3,6 +3,13 @@
 #include <stdlib.h>
 
 #include "mnemonics.h"
+#include "errorcodes.h"
+
+/*
+====================
+======= Test Vectors
+====================
+*/
 
 #define VECTOR_PASSPHRASE "TREZOR"
 #define VECTOR_PASSPHRASE_L 6
@@ -60,7 +67,7 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -84,7 +91,7 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -164,7 +171,7 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -188,7 +195,7 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -268,7 +275,7 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -292,7 +299,7 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -372,7 +379,7 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -396,7 +403,7 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -476,7 +483,7 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -500,7 +507,7 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -580,7 +587,7 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -604,7 +611,7 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -684,7 +691,7 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -708,7 +715,7 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -788,7 +795,7 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -812,7 +819,7 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -892,7 +899,7 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -916,7 +923,7 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -996,7 +1003,7 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1020,7 +1027,7 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1100,7 +1107,7 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1124,7 +1131,7 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1204,7 +1211,7 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1228,7 +1235,7 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1308,7 +1315,7 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1332,7 +1339,7 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1412,7 +1419,7 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1436,7 +1443,7 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1516,7 +1523,7 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1540,7 +1547,7 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1620,7 +1627,7 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1644,7 +1651,7 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1724,7 +1731,7 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1748,7 +1755,7 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1828,7 +1835,7 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1852,7 +1859,7 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1932,7 +1939,7 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1956,7 +1963,7 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2036,7 +2043,7 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2060,7 +2067,7 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2140,7 +2147,7 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2164,7 +2171,7 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2244,7 +2251,7 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2268,7 +2275,7 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2348,7 +2355,7 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2372,7 +2379,7 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2452,7 +2459,7 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2476,7 +2483,7 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2503,6 +2510,434 @@ START_TEST (vector_23_en)
 }
 END_TEST
 
+/*
+=====================
+===== to mnemonic
+=====================
+*/
+
+START_TEST ( to_mnemonic_NULL_entropy )
+{
+    unsigned char *mnemonic;
+    int err;
+    err = entropy_to_mnemonic(
+        NULL,
+        NULL, // entropy
+        10,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null entropy param did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_NULL_mnemonic )
+{
+#define VECTOR_NULL_TEST_E_LEN 32
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_NULL_TEST_E_LEN;
+    int err;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        NULL
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic pointer did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_too_big_multiple )
+{
+#define VECTOR_TOO_BIG_MULTIPLE_E_LEN 64
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f,0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_TOO_BIG_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_WITHIN_16_32,
+        "Too large entropy buffer did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_too_small_multiple )
+{
+#define VECTOR_TOO_SMALL_MULTIPLE_E_LEN 8
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5
+    };
+    size_t entropy_l = VECTOR_TOO_SMALL_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_WITHIN_16_32,
+        "Entropy buffer too small did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_not_multiple )
+{
+#define VECTOR_NOT_MULTIPLE_E_LEN 31
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d
+    };
+    size_t entropy_l = VECTOR_NOT_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4,
+        "Entropy buffer not multiple of 4 did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_larger_buffer )
+{
+#define VECTOR_LARGE_BUFFER_M_LEN 152
+#define VECTOR_LARGE_BUFFER_E_LEN 32
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f,0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_LARGE_BUFFER_E_LEN;
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, entropy_l,
+        &mnemonic
+    );
+
+    ck_assert_msg(
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
+        err
+    );
+
+    ck_assert_msg(
+        mnemonic != NULL,
+        "Output mnemonic is NULL."
+    );
+
+    size_t mnemonic_l = strlen((char *) mnemonic);
+    ck_assert_msg(
+        mnemonic_l == VECTOR_LARGE_BUFFER_M_LEN,
+        "Output mnemonic size didn't match = %llu.",
+        mnemonic_l
+    );
+
+    ck_assert_msg(
+        memcmp(mnemonic, mnemonic_ref, VECTOR_LARGE_BUFFER_M_LEN) == 0,
+        "Output didn't match."
+    );
+    free(mnemonic);
+}
+END_TEST
+
+/*
+====================
+==== to seed
+====================
+*/
+
+START_TEST ( to_seed_NULL_mnemonic )
+{
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        NULL, 23,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "NULL mnemonic pointer did not raise proper error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_NULL_mnemonic )
+{
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        NULL, 23,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "NULL mnemonic pointer did not raise proper error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_NULL_pass )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen(mnemonic_ref),
+        NULL, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_OK,
+        "NULL pass pointer did not generate seed succesfully."
+    );
+
+    free(seed);
+}
+END_TEST
+
+START_TEST ( to_seed_zero_pass )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen(mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, 0,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_OK,
+        "0 length pass did not generate seed succesfully."
+    );
+
+    free(seed);
+}
+END_TEST
+
+START_TEST ( to_seed_NULL_seed )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen(mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        NULL
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "NULL seed pointer did not raise proper error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_smaller_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen(mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Mnemonic too short didn't raise error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_longer_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold unfold";
+    unsigned char seed_ref[] = {
+0x01,0xf5,0xbc,0xed,0x59,0xde,0xc4,0x8e,0x36,0x2f,0x2c,0x45,0xb5,0xde,0x68,0xb9,0xfd,0x6c,0x92,0xc6,0x63,0x4f,0x44,0xd6,0xd4,0x0a,0xab,0x69,0x05,0x65,0x06,0xf0,0xe3,0x55,0x24,0xa5,0x18,0x03,0x4d,0xdc,0x11,0x92,0xe1,0xda,0xcd,0x32,0xc1,0xed,0x3e,0xaa,0x3c,0x3b,0x13,0x1c,0x88,0xed,0x8e,0x7e,0x54,0xc4,0x9a,0x5d,0x09,0x98
+    };
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen(mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Mnemonic too long didn't raise error"
+    );
+}
+END_TEST
+
+/*
+====================
+==== to entropy
+====================
+*/
+
+START_TEST ( to_entropy_NULL_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        NULL, 10,
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_NULL_entropy )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen(mnemonic_ref),
+        NULL, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_NULL_entropy_l )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen(mnemonic_ref),
+        &s_entropy, NULL
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+
+START_TEST ( to_entropy_longer_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen(mnemonic_ref),
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err != IS_OK,
+        "Error code is nonzero for shorte rmnemonic."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_shorter_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen(mnemonic_ref),
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err != IS_OK,
+        "Error code is nonzero for shorte rmnemonic."
+    );
+}
+END_TEST
+
+/*
+START_TEST ( test_name )
+{
+    ck_assert_msg(
+        1 == 0,
+        "msg"
+    );
+}
+END_TEST
+*/
 
 Suite * mnemonics_test_suite(void)
 {
@@ -2514,6 +2949,7 @@ Suite * mnemonics_test_suite(void)
     /* Core test case */
     tc_core = tcase_create("Core");
 
+    // test vectors
     tcase_add_test(tc_core, vector_0_en);
     tcase_add_test(tc_core, vector_1_en);
     tcase_add_test(tc_core, vector_2_en);
@@ -2539,6 +2975,29 @@ Suite * mnemonics_test_suite(void)
     tcase_add_test(tc_core, vector_22_en);
     tcase_add_test(tc_core, vector_23_en);
     
+    // to mnemonic
+    tcase_add_test(tc_core, to_mnemonic_NULL_entropy);
+    tcase_add_test(tc_core, to_mnemonic_NULL_mnemonic);
+    tcase_add_test(tc_core, to_mnemonic_entropy_too_big_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_too_small_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_not_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_larger_buffer);
+
+    // to seed
+    tcase_add_test(tc_core, to_seed_NULL_mnemonic);
+    tcase_add_test(tc_core, to_seed_NULL_pass);
+    tcase_add_test(tc_core, to_seed_zero_pass);
+    tcase_add_test(tc_core, to_seed_NULL_seed);
+    tcase_add_test(tc_core, to_seed_smaller_mnemonic);
+    tcase_add_test(tc_core, to_seed_longer_mnemonic);
+
+    // to entropy
+    tcase_add_test(tc_core, to_entropy_NULL_mnemonic);
+    tcase_add_test(tc_core, to_entropy_NULL_entropy);
+    tcase_add_test(tc_core, to_entropy_NULL_entropy_l);
+    tcase_add_test(tc_core, to_entropy_shorter_mnemonic);
+    tcase_add_test(tc_core, to_entropy_longer_mnemonic);
+
     suite_add_tcase(s, tc_core);
 
     return s;
