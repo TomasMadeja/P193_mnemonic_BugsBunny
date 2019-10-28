@@ -2905,7 +2905,7 @@ START_TEST ( dictionary_NULL_path )
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "msg"
+        "Error code not EC_NULL_POINTER"
     );
 }
 END_TEST
@@ -2920,7 +2920,7 @@ START_TEST ( dictionary_NULL_dict )
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "msg"
+        "Error code not EC_NULL_POINTER"
     );
 }
 END_TEST
@@ -2935,7 +2935,7 @@ START_TEST ( dictionary_file_doesntexist )
     );
     ck_assert_msg(
         err == EC_ERROR_OPENING_FILE,
-        "msg"
+        "Error code not EC_ERROR_OPENING_FILE"
     );
 }
 END_TEST
@@ -2950,7 +2950,7 @@ START_TEST ( dictionary_file_shorter )
     );
     ck_assert_msg(
         err == EC_NOT_ENOUGH_WORDS,
-        "msg"
+        "Error code not EC_NOT_ENOUGH_WORDS"
     );
 }
 END_TEST
@@ -2965,7 +2965,7 @@ START_TEST ( dictionary_file_longer )
     );
     ck_assert_msg(
         err == EC_FILE_TOO_LONG,
-        "Incorrect error code"
+        "Error code not EC_FILE_TOO_LONG"
     );
 }
 END_TEST
@@ -2980,7 +2980,7 @@ START_TEST ( dictionary_word_too_long )
     );
     ck_assert_msg(
         err == EC_WORD_TOO_LONG,
-        "Incorrect error code"
+        "Error code not EC_WORD_TOO_LONG"
     );
 }
 END_TEST
@@ -3132,7 +3132,7 @@ START_TEST ( dictionary_english_dict )
     for (i=0; i<2048; i++)
     {
         ck_assert_msg( 
-            strcmp(dict.words[i], ref[i]) == 0,
+            strcmp((char *) dict.words[i], ref[i]) == 0,
             "Incorrect word for index %u.",
             i 
         );
