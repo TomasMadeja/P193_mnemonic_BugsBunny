@@ -20,16 +20,16 @@ Converts the input entropy to a mnemonic phrase using the given dictionary.
 
 - **dictionary**: pointer to a dictionary struct with words to use in mnemonics (if NULL default dictionary is used)
 - **entropy**: binary entropy input
-- **entropy_l**: length of the input entropy in bytes
+- **entropy_l**: length of the input entropy in bytes. Must be multiple of 4 and 16 <= entropy_l <= 32.
 - **output**: pointer to a string of the output mnemonic (the memory is dinamically allocated and needs to be freed afterwards)
 
-- **return**: length of the output if successful, a negative error code otherwise
+- **return**: length of the mnemonic phrase if successful, a negative error code otherwise
 
 #### int mnemonic_to_seed(const unsigned char *mnemonic, size_t mnemonic_l, const unsigned char *passphrase, size_t passphrase_l, unsigned char **seed)
 Converts mnemonic phrase to binary seed.
 
 - **mnemonic**: input mnemonics in text format
-- **mnemonic_l**: length of the input mnemonics in bytes
+- **mnemonic_l**: length of the input mnemonics in characters
 - **passphrase**: passphrase for mnemonics
 - **passphrase_l**: length of the passphrase
 - **seed**: pointer to a 64 bytes long string of the binary seed output (the memory is dinamically allocated and needs to be freed afterwards)
@@ -42,7 +42,7 @@ Converts the input (text) memonic to (binary) entropy.
 - **dictionary**: pointer to a dictionary struct with words to use in mnemonics (if NULL default dictionary is used)
 - **mnemonic**: input mnemonics in text format
 - **mnemonic_l**: length of the input mnemonics in bytes
-- **entropy**: binary entropy output
+- **entropy**: binary entropy output (the memory is dinamically allocated and needs to be freed afterwards)
 - **entropy_l**: length of the entropy in bytes
 
 - **return**: zero if successful, a negative error code otherwise
