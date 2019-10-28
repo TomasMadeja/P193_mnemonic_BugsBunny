@@ -22,6 +22,7 @@ int parse_error(FILE *file, int error_code);
 #define EC_NULL_POINTER -4
 #define EC_IO_ERROR -5
 #define EC_PHRASE_DOES_NOT_GENERATE_SEED -6
+#define EC_INVALID_PHRASE_WORD_COUNT -7
 
 #define EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4 -20
 #define EC_ENTROPY_LENGTH_NOT_WITHIN_16_32 -21
