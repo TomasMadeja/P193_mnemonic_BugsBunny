@@ -38,20 +38,24 @@ int parse_dict_from_file(char *path, struct dictionary *dict) {
         size_t len = 0;
         while(!feof(file) && (c = (unsigned char) fgetc(file)) != '\n') {
             if (!isalpha(c)) {
+                fclose(file);
                 return abort_dict(dict, i, EC_INVALID_CHARACTER);
             }
             buffer[len] = c;
             len++;
             if (len > 20) {
+                fclose(file);
                 return abort_dict(dict, i, EC_WORD_TOO_LONG);
             }
         }
         if (c != '\n') {
+            fclose(file);
             return abort_dict(dict, i, EC_NOT_ENOUGH_WORDS);
         }
         buffer[len] = '\0';
         dict->words[i] = malloc(len + 1);
         if (dict->words[i] == NULL) {
+            fclose(file);
             return abort_dict(dict, i, EC_ALLOCATION_ERROR);
         }
         memcpy(dict->words[i], buffer, len + 1);
@@ -59,6 +63,7 @@ int parse_dict_from_file(char *path, struct dictionary *dict) {
 
     c = (unsigned char) fgetc(file);
     if (!feof(file)) {
+        fclose(file);
         return abort_dict(dict, i, EC_FILE_TOO_LONG);
     }
 
