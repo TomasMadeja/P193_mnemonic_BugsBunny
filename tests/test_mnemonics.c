@@ -2913,10 +2913,9 @@ END_TEST
 START_TEST ( dictionary_NULL_dict )
 {
     int err;
-    struct dictionary dict;
     err = parse_dict_from_file(
         "../resources/tests/english.txt",
-        &dict
+        NULL
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
