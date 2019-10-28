@@ -3132,12 +3132,12 @@ START_TEST ( dictionary_english_dict )
     for (i=0; i<2048; i++)
     {
         ck_assert_msg( 
-            strcmp(dict->words[i], ref[i]) == 0,
+            strcmp(dict.words[i], ref[i]) == 0,
             "Incorrect word for index %u.",
             i 
         );
     }
-    free_dict(dict);
+    free_dict(&dict);
 }
 END_TEST
 
