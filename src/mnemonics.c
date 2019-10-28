@@ -40,7 +40,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
-    if (entropy == NULL) {
+    if (entropy == NULL || output == NULL) {
         return EC_NULL_POINTER;
     }
     if (entropy_l % 4 != 0) {
@@ -244,8 +244,18 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t passphrase_l,
                      unsigned char **seed) {
 
-    if (mnemonic == NULL) {
+    if (mnemonic == NULL || seed == NULL) {
         return EC_NULL_POINTER;
+    }
+
+    uint8_t word_count = 1;
+    for (size_t i = 0; i < mnemonic_l; i++) {
+        if (mnemonic[i] == ' ') {
+            word_count++;
+        }
+    }
+    if (word_count % 3 != 0 || word_count < 12 || word_count > 24) {
+        return EC_INVALID_PHRASE_WORD_COUNT;
     }
 
     const unsigned char *pass = passphrase;
@@ -316,7 +326,7 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
                         unsigned char **entropy,
                         size_t *entropy_l) {
 
-    if (mnemonic == NULL) {
+    if (mnemonic == NULL || entropy == NULL || entropy_l == NULL) {
         return EC_NULL_POINTER;
     }
 
@@ -331,6 +341,9 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
         if (mnemonic[i] == ' ') {
             word_count++;
         }
+    }
+    if (word_count % 3 != 0 || word_count < 12 || word_count > 24) {
+        return EC_INVALID_PHRASE_WORD_COUNT;
     }
     *entropy_l = (word_count * 11 - 1) / 8;
 
