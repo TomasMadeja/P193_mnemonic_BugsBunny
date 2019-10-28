@@ -17,6 +17,11 @@ void print_hex(unsigned char *bytes, size_t len) {
 
 int check_flags(int argc, char **argv) {
 
+    if (argc != 3) {
+        printf("Error: Incorrect number of arguments.\n");
+        return 0;
+    }
+
     int hflag = 0;
     int eflag = 0;
     int mflag = 0;
@@ -47,24 +52,12 @@ int check_flags(int argc, char **argv) {
         return 0;
     }
     if (eflag && !mflag && !cflag) {
-        if (argc != 3) {
-            printf("Error: Incorrect number of arguments.\n");
-            return 0;
-        }
         return 1;
     }
     if (mflag && !eflag && !cflag) {
-        if (argc != 3) {
-            printf("Error: Incorrect number of arguments.\n");
-            return 0;
-        }
         return 2;
     }
     if (cflag && !mflag && !eflag) {
-        if (argc != 4) {
-            printf("Error: Incorrect number of arguments.\n");
-            return 0;
-        }
         return 3;
     }
     if (!cflag && !mflag && !eflag) {
@@ -77,10 +70,10 @@ int check_flags(int argc, char **argv) {
 
 void print_help() {
     const char help_string[] = "Usage: example flag\n"
-                               "  -h                             Display this help.\n"
-                               "  -m mnemonic_file               Computes the seed from a mnemonic phrase.\n"
-                               "  -e entropy_file                Computes the mnemonic phrase from entropy.\n"
-                               "  -c mnemonic_file entropy_file  Compare the mnemonic and entropy.\n\n"
+                               "  -h                    Display this help.\n"
+                               "  -m mnemonic_file      Computes the seed from a mnemonic phrase.\n"
+                               "  -e entropy_file       Computes the mnemonic phrase from entropy.\n"
+                               "  -c mnemonic_file      Computes entropy from a mnemonic phrase.\n\n"
                                "Mnemonic files should be text files with a mnemonic phrase.\n"
                                "Entropy files should be binary.\n";
 
@@ -137,8 +130,15 @@ void convert_entropy_to_mnemonics(char *entropy_file_name) {
         return;
     }
 
+    int return_code;
+
     /* Converting entropy to a mnemonic phrase using the default dictionary. */
-    entropy_to_mnemonic(NULL, entropy, entropy_len, &mnemonic);
+    return_code = entropy_to_mnemonic(NULL, entropy, entropy_len, &mnemonic);
+
+    if (return_code != 0) {
+        printf("Error: Could not convert entropy.\n");
+        return;
+    }
 
     /* Printing the mnemonic phrase. */
     printf("ENTROPY -> MNEMONIC\n");
@@ -162,9 +162,16 @@ void convert_mnemonics_to_seed(char *mnemonics_file_name) {
         return;
     }
 
+    int return_code;
+
     /* Converting the mnemonic phrase to seed using the passphrase "TREZOR". */
-    mnemonic_to_seed(mnemonic, strlen((char*) mnemonic),
+    return_code = mnemonic_to_seed(mnemonic, strlen((char*) mnemonic),
                      (unsigned char*) "TREZOR", 6, &seed);
+
+    if (return_code != 0) {
+        printf("Error: Could not convert mnemonic.\n");
+        return;
+    }
 
     /* Printing the seed. */
     printf("MNEMONIC -> SEED\n");
@@ -175,11 +182,11 @@ void convert_mnemonics_to_seed(char *mnemonics_file_name) {
     free(seed);
 }
 
-void check_mnemonics_entropy(char *mnemonics_file_name, char *entropy_file_name) {
+void convert_mnemonic_to_entropy(char *mnemonics_file_name) {
 
     unsigned char mnemonic[MNEMONIC_BUFFER_LEN];
     size_t mnemonic_len = 0;
-    unsigned char entropy[ENTROPY_BUFFER_LEN];
+    unsigned char *entropy;
     size_t entropy_len = 0;
     int return_code;
 
@@ -190,26 +197,21 @@ void check_mnemonics_entropy(char *mnemonics_file_name, char *entropy_file_name)
         return;
     }
 
-    entropy_len = get_entropy(entropy_file_name, entropy);
-
-    if (entropy_len == 0) {
-        printf("Error: Cannot load the entropy file.\n");
-        return;
-    }
-
-    /* Checking if the given mnemonic is the correct one for the input
-     * entropy using the default dictionary. */
+    /* Converting the mnemonic phrase to entropy using the default dictionary. */
     return_code = mnemonic_to_entropy(NULL,
                         mnemonic, strlen((char*) mnemonic),
                         &entropy, &entropy_len);
 
-    /* Printing out the result. */
-    printf("MNEMONIC - ENTROPY CHECK\n");
-    if (return_code == 0) {
-        printf("The given mnemonic-entropy pair is correct.\n\n");
-    } else {
-        printf("Something went wrong. Error code: %d\n\n", return_code);
+    if (return_code != 0) {
+        printf("Error: Could not convert mnemonic.\n");
+        return;
     }
+
+    /* Printing out the result. */
+    printf("MNEMONIC -> ENTROPY\n");
+    printf("The entropy for the mnemonic phrase\n%sis:\n", mnemonic);
+    print_hex(entropy, entropy_len);
+    printf("\n");
 }
 
 int main(int argc, char **argv) {
@@ -231,21 +233,13 @@ int main(int argc, char **argv) {
         break;
       // mnemonic-entropy check
       case 3:
-        check_mnemonics_entropy(argv[2], argv[3]);
+        convert_mnemonic_to_entropy(argv[2]);
         break;
       // print help
       default:
         print_help();
         break;
     }
-
-    /* Defining an example input entropy */
-    #define TEST_VECTOR_LEN 24
-    unsigned char input_entropy[TEST_VECTOR_LEN] =
-        "\x66\x10\xb2\x59\x67\xcd\xcc\xa9"
-        "\xd5\x98\x75\xf5\xcb\x50\xb0\xea"
-        "\x75\x43\x33\x11\x86\x9e\x93\x0b";
-
 
     return EXIT_SUCCESS;
 }
