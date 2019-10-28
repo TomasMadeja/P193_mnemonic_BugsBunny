@@ -280,7 +280,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
         return EC_ALLOCATION_ERROR;
     }
 
-    int ret = pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, passphrase_l + 8, out);
+    int ret = pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, pass_l + 8, out);
 
     free(salt);
 
