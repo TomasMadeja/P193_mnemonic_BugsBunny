@@ -40,7 +40,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
                         size_t entropy_l,
                         unsigned char **output) {
 
-    if (entropy == NULL) {
+    if (entropy == NULL || output == NULL) {
         return EC_NULL_POINTER;
     }
     if (entropy_l % 4 != 0) {
@@ -244,8 +244,18 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
                      size_t passphrase_l,
                      unsigned char **seed) {
 
-    if (mnemonic == NULL) {
+    if (mnemonic == NULL || seed == NULL) {
         return EC_NULL_POINTER;
+    }
+
+    uint8_t word_count = 1;
+    for (size_t i = 0; i < mnemonic_l; i++) {
+        if (mnemonic[i] == ' ') {
+            word_count++;
+        }
+    }
+    if (word_count % 3 != 0 || word_count < 12 || word_count > 24) {
+        return EC_INVALID_PHRASE_WORD_COUNT;
     }
 
     const unsigned char *pass = passphrase;
@@ -270,7 +280,7 @@ int mnemonic_to_seed(const unsigned char *mnemonic,
         return EC_ALLOCATION_ERROR;
     }
 
-    int ret = pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, passphrase_l + 8, out);
+    int ret = pbkdf2_hmac_sha512_2048(mnemonic, mnemonic_l, salt, pass_l + 8, out);
 
     free(salt);
 
@@ -316,7 +326,7 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
                         unsigned char **entropy,
                         size_t *entropy_l) {
 
-    if (mnemonic == NULL) {
+    if (mnemonic == NULL || entropy == NULL || entropy_l == NULL) {
         return EC_NULL_POINTER;
     }
 
@@ -331,6 +341,9 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
         if (mnemonic[i] == ' ') {
             word_count++;
         }
+    }
+    if (word_count % 3 != 0 || word_count < 12 || word_count > 24) {
+        return EC_INVALID_PHRASE_WORD_COUNT;
     }
     *entropy_l = (word_count * 11 - 1) / 8;
 
@@ -364,5 +377,72 @@ int mnemonic_to_entropy(const struct dictionary *dictionary,
     }
 
     *entropy = out;
+    return EC_OK;
+}
+
+int entropy_to_mnemonic_seed(const struct dictionary *dictionary,
+                             const unsigned char *entropy,
+                             size_t entropy_l,
+                             const unsigned char *passphrase,
+                             size_t passphrase_l,
+                             unsigned char **mnemonic,
+                             unsigned char **seed) {
+
+    int ret = entropy_to_mnemonic(dictionary, entropy, entropy_l, mnemonic);
+    if (ret <= 0) {
+        return ret;
+    }
+    int ret2 = mnemonic_to_seed(*mnemonic, (size_t) ret, passphrase, passphrase_l,
+                           seed);
+    if (ret2 != EC_OK) {
+        free(*mnemonic);
+        return ret2;
+    }
+
+    return ret;
+}
+
+int mnemonic_to_entropy_seed(const struct dictionary *dictionary,
+                             const unsigned char *mnemonic,
+                             size_t mnemonic_l,
+                             const unsigned char *passphrase,
+                             size_t passphrase_l,
+                             unsigned char **entropy,
+                             size_t *entropy_l,
+                             unsigned char **seed) {
+
+    int ret = mnemonic_to_entropy(dictionary, mnemonic, mnemonic_l,
+                                  entropy, entropy_l);
+    if (ret != EC_OK) {
+        return ret;
+    }
+    ret = mnemonic_to_entropy_seed(dictionary, mnemonic, mnemonic_l,
+                                   passphrase, passphrase_l,
+                                   entropy, entropy_l, seed);
+    if (ret != EC_OK) {
+        free(*entropy);
+    }
+    return ret;
+}
+
+int check_phrase_seed(const unsigned char *mnemonic,
+                      size_t mnemonic_l,
+                      const unsigned char *passphrase,
+                      size_t passphrase_l,
+                      const unsigned char *seed) {
+
+    unsigned char *actual_seed;
+    int ret = mnemonic_to_seed(mnemonic, mnemonic_l,
+                               passphrase, passphrase_l,
+                               &actual_seed);
+    if (ret != EC_OK) {
+        return ret;
+    }
+
+    ret = memcmp(seed, actual_seed, SHA512_DIGEST_SIZE);
+    if (ret != 0) {
+        return EC_PHRASE_DOES_NOT_GENERATE_SEED;
+    }
+
     return EC_OK;
 }

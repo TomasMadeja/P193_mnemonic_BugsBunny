@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "mnemonics.h"
+#include "errorcodes.h"
 
 void printHex(unsigned char *bytes, size_t len) {
     for (size_t i = 0; i < len; i++) {
@@ -13,11 +14,10 @@ void printHex(unsigned char *bytes, size_t len) {
 
 int main(void) {
 
-    #define TEST_VECTOR_LEN 24
-    unsigned char input_entropy[TEST_VECTOR_LEN] =
-            "\x66\x10\xb2\x59\x67\xcd\xcc\xa9"
-            "\xd5\x98\x75\xf5\xcb\x50\xb0\xea"
-            "\x75\x43\x33\x11\x86\x9e\x93\x0b";
+    #define TEST_VECTOR_LEN 32
+    unsigned char input_entropy[TEST_VECTOR_LEN] = {
+            0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+};
 
     unsigned char *mnemonic;
     unsigned char *seed;
@@ -36,6 +36,16 @@ int main(void) {
     printf("%s\n", mnemonic);
     printHex(seed, 64);
     printHex(check_entropy, check_entropy_size);
+
+    int ret = 0;
+    if ((ret = check_phrase_seed(mnemonic, strlen((char*) mnemonic),
+                          (unsigned char*) "TREZOR", 6,
+                          seed)) == EC_OK) {
+        printf("OK\n");
+    } else {
+        printf("NOK\n");
+        parse_error(stdout, ret);
+    }
 
     free(mnemonic);
     free(seed);

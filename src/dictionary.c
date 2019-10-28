@@ -1,8 +1,78 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 #include "errorcodes.h"
+
+int abort_dict(struct dictionary *dict, size_t n, int error_code) {
+    for (size_t i = 0; i < n; i++) {
+        free(dict->words[i]);
+    }
+    return error_code;
+}
+
+int free_dict(struct dictionary *dict) {
+    for (size_t i = 0; i < 2048; i++) {
+        free(dict->words[i]);
+    }
+    return EC_OK;
+}
+
+int parse_dict_from_file(char *path, struct dictionary *dict) {
+
+    if (path == NULL || dict == NULL) {
+        return EC_NULL_POINTER;
+    }
+
+    FILE *file = fopen(path, "r");
+    if (file == NULL) {
+        return EC_ERROR_OPENING_FILE;
+    }
+
+    unsigned char buffer[22];
+    unsigned char c = 0;
+    size_t i = 0;
+    for (i = 0; i < 2048; i++) {
+        size_t len = 0;
+        while(!feof(file) && (c = (unsigned char) fgetc(file)) != '\n') {
+            if (!isalpha(c)) {
+                fclose(file);
+                return abort_dict(dict, i, EC_INVALID_CHARACTER);
+            }
+            buffer[len] = c;
+            len++;
+            if (len > 20) {
+                fclose(file);
+                return abort_dict(dict, i, EC_WORD_TOO_LONG);
+            }
+        }
+        if (c != '\n') {
+            fclose(file);
+            return abort_dict(dict, i, EC_NOT_ENOUGH_WORDS);
+        }
+        buffer[len] = '\0';
+        dict->words[i] = malloc(len + 1);
+        if (dict->words[i] == NULL) {
+            fclose(file);
+            return abort_dict(dict, i, EC_ALLOCATION_ERROR);
+        }
+        memcpy(dict->words[i], buffer, len + 1);
+    }
+
+    c = (unsigned char) fgetc(file);
+    if (!feof(file)) {
+        fclose(file);
+        return abort_dict(dict, i, EC_FILE_TOO_LONG);
+    }
+
+    if (fclose(file) != 0) {
+        return abort_dict(dict, i, EC_ERROR_CLOSING_FILE);
+    }
+
+    return EC_OK;
+}
 
 
 static struct dictionary dictionary[1] = { { { NULL } } };

@@ -9,38 +9,22 @@ struct dictionary {
 };
 
 
-/*
-@string input string of 2048 delimiter separated words
-        IF NULL, function will create DEFAULT ENGLISH dictionary
-@string_l length of string in bytes (chars)
-@delim single character delimiter. 
-    One in {'\n', ',' , ';' , ' ' } (newline, single whitespace, comma, semicolon).
-@delim_l delimeter length (without '\0')
-@dict pointer to variable that will hold the new dictionary (function will allocate new structure)
+/**
+ * @brief parse_dict_from_file
+ * File must contain exactly 2048 lines ended with newline character
+ * Each line must consist of maximum 20 english alphabet letters plus newline
+ * @param file File to read from
+ * @param dict struct dict to initialize
+ * @return 0 on success, negative error code otherwise
+ */
+int parse_dict_from_file(char *path, struct dictionary *dict);
 
-@return 0 IF success ELSE negative error code
-*/
-int parse_dict_from_string(
-    const unsigned char *string, size_t string_l, 
-    const unsigned char *delim, size_t delim_l, 
-    struct dictionary *dict
-);
-
-/*
-@string path to input  file of 2048 delimiter separated words, 
-@string_l length of path string  in bytes (chars)
-@delim single character delimiter. 
-    One in {'\n', ',' , ';' , ' ' } (newline, single whitespace, comma, semicolon).
-@delim_l delimeter length (without '\0')
-@dict pointer to variable that will hold the new dictionary (function will allocate new structure)
-
-@return 0 IF success ELSE negative error code
-*/
-int parse_dict_from_file(
-    const unsigned char *path, size_t path_l,
-    const unsigned char *delim, size_t delim_l, 
-    struct dictionary *dict
-);
+/**
+ * @brief free_dict
+ * @param dict Dictionary to free
+ * @return 0 on success, negative error code otherwise
+ */
+int free_dict(struct dictionary *dict);
 
 /**
  * @brief Sets up the default dictionary if needed and returns pointer to it
