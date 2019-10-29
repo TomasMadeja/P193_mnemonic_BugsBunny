@@ -2905,7 +2905,8 @@ START_TEST ( dictionary_NULL_path )
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "Error code not EC_NULL_POINTER"
+        "Error code not EC_NULL_POINTER = %d",
+        err
     );
 }
 END_TEST
@@ -2919,7 +2920,8 @@ START_TEST ( dictionary_NULL_dict )
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "Error code not EC_NULL_POINTER"
+        "Error code not EC_NULL_POINTER = %d",
+        err
     );
 }
 END_TEST
@@ -2934,7 +2936,8 @@ START_TEST ( dictionary_file_doesntexist )
     );
     ck_assert_msg(
         err == EC_ERROR_OPENING_FILE,
-        "Error code not EC_ERROR_OPENING_FILE"
+        "Error code not EC_ERROR_OPENING_FILE = %d",
+        err
     );
 }
 END_TEST
@@ -2949,7 +2952,8 @@ START_TEST ( dictionary_file_shorter )
     );
     ck_assert_msg(
         err == EC_NOT_ENOUGH_WORDS,
-        "Error code not EC_NOT_ENOUGH_WORDS"
+        "Error code not EC_NOT_ENOUGH_WORDS = %d",
+        err
     );
 }
 END_TEST
@@ -2964,7 +2968,8 @@ START_TEST ( dictionary_file_longer )
     );
     ck_assert_msg(
         err == EC_FILE_TOO_LONG,
-        "Error code not EC_FILE_TOO_LONG"
+        "Error code not EC_FILE_TOO_LONG = %d",
+        err
     );
 }
 END_TEST
@@ -2979,7 +2984,8 @@ START_TEST ( dictionary_word_too_long )
     );
     ck_assert_msg(
         err == EC_WORD_TOO_LONG,
-        "Error code not EC_WORD_TOO_LONG"
+        "Error code not EC_WORD_TOO_LONG = %d",
+        err
     );
 }
 END_TEST
@@ -3125,7 +3131,8 @@ START_TEST ( dictionary_english_dict )
     );
     ck_assert_msg(
         err == EC_OK,
-        "Nonzero error code."
+        "Nonzero error code. = %d",
+        err
     );
     unsigned int i;
     for (i=0; i<2048; i++)
