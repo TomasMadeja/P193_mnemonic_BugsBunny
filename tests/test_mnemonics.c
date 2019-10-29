@@ -2905,7 +2905,8 @@ START_TEST ( dictionary_NULL_path )
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "Error code not EC_NULL_POINTER"
+        "Error code not EC_NULL_POINTER = %d",
+        err
     );
 }
 END_TEST
@@ -2914,12 +2915,13 @@ START_TEST ( dictionary_NULL_dict )
 {
     int err;
     err = parse_dict_from_file(
-        "../resources/tests/english.txt",
+        "resources/tests/english.txt",
         NULL
     );
     ck_assert_msg(
         err == EC_NULL_POINTER,
-        "Error code not EC_NULL_POINTER"
+        "Error code not EC_NULL_POINTER = %d",
+        err
     );
 }
 END_TEST
@@ -2929,12 +2931,13 @@ START_TEST ( dictionary_file_doesntexist )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/doesnotexist.txt",
+        "resources/tests/doesnotexist.txt",
         &dict
     );
     ck_assert_msg(
         err == EC_ERROR_OPENING_FILE,
-        "Error code not EC_ERROR_OPENING_FILE"
+        "Error code not EC_ERROR_OPENING_FILE = %d",
+        err
     );
 }
 END_TEST
@@ -2944,12 +2947,13 @@ START_TEST ( dictionary_file_shorter )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_few_words.txt",
+        "resources/tests/english_few_words.txt",
         &dict
     );
     ck_assert_msg(
         err == EC_NOT_ENOUGH_WORDS,
-        "Error code not EC_NOT_ENOUGH_WORDS"
+        "Error code not EC_NOT_ENOUGH_WORDS = %d",
+        err
     );
 }
 END_TEST
@@ -2959,12 +2963,13 @@ START_TEST ( dictionary_file_longer )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_too_many_words.txt",
+        "resources/tests/english_too_many_words.txt",
         &dict
     );
     ck_assert_msg(
         err == EC_FILE_TOO_LONG,
-        "Error code not EC_FILE_TOO_LONG"
+        "Error code not EC_FILE_TOO_LONG = %d",
+        err
     );
 }
 END_TEST
@@ -2974,12 +2979,13 @@ START_TEST ( dictionary_word_too_long )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_word_too_long.txt",
+        "resources/tests/english_word_too_long.txt",
         &dict
     );
     ck_assert_msg(
         err == EC_WORD_TOO_LONG,
-        "Error code not EC_WORD_TOO_LONG"
+        "Error code not EC_WORD_TOO_LONG = %d",
+        err
     );
 }
 END_TEST
@@ -3120,12 +3126,13 @@ START_TEST ( dictionary_english_dict )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english.txt",
+        "resources/tests/english.txt",
         &dict
     );
     ck_assert_msg(
         err == EC_OK,
-        "Nonzero error code."
+        "Nonzero error code. = %d",
+        err
     );
     unsigned int i;
     for (i=0; i<2048; i++)
