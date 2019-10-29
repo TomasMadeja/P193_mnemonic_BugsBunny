@@ -14,10 +14,7 @@ int abort_dict(struct dictionary *dict, size_t n, int error_code) {
 }
 
 int free_dict(struct dictionary *dict) {
-    for (size_t i = 0; i < 2048; i++) {
-        free(dict->words[i]);
-    }
-    return EC_OK;
+    return abort_dict(dict, 2048, EC_OK);
 }
 
 int parse_dict_from_file(char *path, struct dictionary *dict) {
@@ -32,16 +29,16 @@ int parse_dict_from_file(char *path, struct dictionary *dict) {
     }
 
     unsigned char buffer[22];
-    unsigned char c = 0;
+    int c;
     size_t i = 0;
     for (i = 0; i < 2048; i++) {
         size_t len = 0;
-        while(!feof(file) && (c = (unsigned char) fgetc(file)) != '\n') {
+        while((c = fgetc(file)) != '\n' && c != EOF) {
             if (!isalpha(c)) {
                 fclose(file);
                 return abort_dict(dict, i, EC_INVALID_CHARACTER);
             }
-            buffer[len] = c;
+            buffer[len] = (unsigned char) c;
             len++;
             if (len > 20) {
                 fclose(file);
@@ -61,9 +58,14 @@ int parse_dict_from_file(char *path, struct dictionary *dict) {
         memcpy(dict->words[i], buffer, len + 1);
     }
 
+<<<<<<< HEAD
+    c = fgetc(file);
+    if (c != EOF) {
+=======
     c = (unsigned char) fgetc(file);
     if (!feof(file)) {
         fclose(file);
+>>>>>>> 6781dd34906ff06a5aedc5f6a0c11a8cd821986c
         return abort_dict(dict, i, EC_FILE_TOO_LONG);
     }
 
