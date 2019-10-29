@@ -10,12 +10,14 @@
 
 # API Usage
 
-#### int init_mnemonics()
+> __int__ init_mnemonics()
+
 A wrapper for OpenSSL initialization. Not mandatory in OpenSSL versions >= 1.1.0.
 
 - **return**: 0 if successful
 
-#### int entropy_to_mnemonic(const struct dictionary *dictionary, const unsigned char *entropy, size_t entropy_l, unsigned char **output)
+> __int__ entropy_to_mnemonic(__const struct dictionary *__ dictionary, __const unsigned char *__ entropy, __size_t__ entropy_l, __unsigned char **__ output)
+
 Converts the input entropy to a mnemonic phrase using the given dictionary.
 
 - **dictionary**: pointer to a dictionary struct with words to use in mnemonics (if NULL default dictionary is used)
@@ -23,9 +25,10 @@ Converts the input entropy to a mnemonic phrase using the given dictionary.
 - **entropy_l**: length of the input entropy in bytes. Must be multiple of 4 and 16 <= entropy_l <= 32.
 - **output**: pointer to a string of the output mnemonic (the memory is dinamically allocated and needs to be freed afterwards)
 
-- **return**: length of the mnemonic phrase if successful, a negative error code otherwise
+- **return**: length of the mnemonic phrase if successful, negative error code otherwise
 
-#### int mnemonic_to_seed(const unsigned char *mnemonic, size_t mnemonic_l, const unsigned char *passphrase, size_t passphrase_l, unsigned char **seed)
+> __int__ mnemonic_to_seed(__const unsigned char *__ mnemonic, __size_t__ mnemonic_l, __const unsigned char *__ passphrase, __size_t__ passphrase_l, __unsigned char **__ seed)
+
 Converts mnemonic phrase to binary seed.
 
 - **mnemonic**: input mnemonics in text format
@@ -34,9 +37,10 @@ Converts mnemonic phrase to binary seed.
 - **passphrase_l**: length of the passphrase
 - **seed**: pointer to a 64 bytes long string of the binary seed output (the memory is dinamically allocated and needs to be freed afterwards)
 
-- **return**: zero if successful, a negative error code otherwise
+- **return**: zero if successful, negative error code otherwise
 
-#### int mnemonic_to_entropy(const struct dictionary *dictionary, const unsigned char *mnemonic, size_t mnemonic_l, unsigned char **entropy, size_t *entropy_l)
+> __int__ mnemonic_to_entropy(__const struct dictionary *__ dictionary, __const unsigned char *__ mnemonic, __size_t__ mnemonic_l, __unsigned char **__ entropy, __size_t *__ entropy_l)
+
 Converts the input (text) memonic to (binary) entropy.
 
 - **dictionary**: pointer to a dictionary struct with words to use in mnemonics (if NULL default dictionary is used)
@@ -45,7 +49,16 @@ Converts the input (text) memonic to (binary) entropy.
 - **entropy**: binary entropy output (the memory is dinamically allocated and needs to be freed afterwards)
 - **entropy_l**: length of the entropy in bytes
 
-- **return**: zero if successful, a negative error code otherwise
+- **return**: zero if successful, negative error code otherwise
+
+> __int__ parse_dict_from_file(__char *__ path, __struct dictionary *__ dict)
+
+Creates a dictionary from file input.
+
+- **path**: path to the file
+- **dict**: pointer to target dictionary struct
+
+- **return**: zero if successful, negative error code otherwise
 
 # Footer
 
