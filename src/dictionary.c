@@ -58,14 +58,9 @@ int parse_dict_from_file(char *path, struct dictionary *dict) {
         memcpy(dict->words[i], buffer, len + 1);
     }
 
-<<<<<<< HEAD
     c = fgetc(file);
     if (c != EOF) {
-=======
-    c = (unsigned char) fgetc(file);
-    if (!feof(file)) {
         fclose(file);
->>>>>>> 6781dd34906ff06a5aedc5f6a0c11a8cd821986c
         return abort_dict(dict, i, EC_FILE_TOO_LONG);
     }
 
