@@ -2915,7 +2915,7 @@ START_TEST ( dictionary_NULL_dict )
 {
     int err;
     err = parse_dict_from_file(
-        "../resources/tests/english.txt",
+        "resources/tests/english.txt",
         NULL
     );
     ck_assert_msg(
@@ -2931,7 +2931,7 @@ START_TEST ( dictionary_file_doesntexist )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/doesnotexist.txt",
+        "resources/tests/doesnotexist.txt",
         &dict
     );
     ck_assert_msg(
@@ -2947,7 +2947,7 @@ START_TEST ( dictionary_file_shorter )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_few_words.txt",
+        "resources/tests/english_few_words.txt",
         &dict
     );
     ck_assert_msg(
@@ -2963,7 +2963,7 @@ START_TEST ( dictionary_file_longer )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_too_many_words.txt",
+        "resources/tests/english_too_many_words.txt",
         &dict
     );
     ck_assert_msg(
@@ -2979,7 +2979,7 @@ START_TEST ( dictionary_word_too_long )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english_word_too_long.txt",
+        "resources/tests/english_word_too_long.txt",
         &dict
     );
     ck_assert_msg(
@@ -3126,7 +3126,7 @@ START_TEST ( dictionary_english_dict )
     int err;
     struct dictionary dict;
     err = parse_dict_from_file(
-        "../resources/tests/english.txt",
+        "resources/tests/english.txt",
         &dict
     );
     ck_assert_msg(
