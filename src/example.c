@@ -17,11 +17,6 @@ void print_hex(unsigned char *bytes, size_t len) {
 
 int check_flags(int argc, char **argv) {
 
-    if (argc != 3) {
-        printf("Error: Incorrect number of arguments.\n");
-        return 0;
-    }
-
     int hflag = 0;
     int eflag = 0;
     int mflag = 0;
@@ -46,6 +41,11 @@ int check_flags(int argc, char **argv) {
             printf("Error: Unknown flag.\n");
             hflag = 1;
         }
+    }
+
+    if (argc != 3 && !hflag) {
+        printf("Error: Incorrect number of arguments.\n");
+        return 0;
     }
 
     if (hflag) {
