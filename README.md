@@ -24,11 +24,10 @@ Compiling tests requires unit testing framework Check >= 0.12.0.
 
 # API Usage
 
-
+Sample usage can be found in (TODO LINK).
 
 ## **Header:** mnemonics.h
 
-Sample usage can be found in (TODO LINK).
 
 > __int__ init_mnemonics()
 
