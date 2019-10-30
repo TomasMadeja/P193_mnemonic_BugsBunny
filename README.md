@@ -1,6 +1,11 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [bip39 Mnemonic Phrase Generator](#bip39-mnemonic-phrase-generator)
+- [Dependencies](#dependencies)
+- [API Usage](#api-usage)
+  - [**Header:** mnemonics.h](#header-mnemonicsh)
+  - [**Header:** dictionary.h](#header-dictionaryh)
+  - [**Error Codes:**](#error-codes)
 - [Footer](#footer)
   - [Team Members](#team-members)
 
@@ -8,7 +13,22 @@
 
 [![Build Status (dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny.svg?branch=dev)](https://travis-ci.org/TomasMadeja/PA193_mnemonic_BugsBunny)
 
+This library implements Mnemonic Phrase Generator described by [bip39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki).
+
+# Dependencies
+
+Compilation requires OpenSSL version >= 1.1.0
+
+Compiling tests requires unit testing framework Check >= 0.12.0.
+
+
 # API Usage
+
+
+
+## **Header:** mnemonics.h
+
+Sample usage can be found in (TODO LINK).
 
 > __int__ init_mnemonics()
 
@@ -51,6 +71,8 @@ Converts the input (text) memonic to (binary) entropy.
 
 - **return**: zero if successful, negative error code otherwise
 
+## **Header:** dictionary.h
+
 > __int__ parse_dict_from_file(__char *__ path, __struct dictionary *__ dict)
 
 Creates a dictionary from file input.
@@ -59,6 +81,40 @@ Creates a dictionary from file input.
 - **dict**: pointer to target dictionary struct
 
 - **return**: zero if successful, negative error code otherwise
+
+## **Error Codes:** 
+
+> EC_OK
+    
+> EC_NOT_IMPLEMENTED
+
+> EC_OPENSSL_ERROR
+
+> EC_ALLOCATION_ERROR
+
+> EC_NULL_POINTER
+
+> EC_IO_ERROR
+
+> EC_PHRASE_DOES_NOT_GENERATE_SEED
+
+> EC_INVALID_PHRASE_WORD_COUNT
+
+> EC_INVALID_CHARACTER
+
+> EC_WORD_TOO_LONG
+
+> EC_NOT_ENOUGH_WORDS
+
+> EC_FILE_TOO_LONG
+
+> EC_ERROR_OPENING_FILE
+
+> EC_ERROR_CLOSING_FILE
+
+> EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4
+
+> EC_ENTROPY_LENGTH_NOT_WITHIN_16_32
 
 # Footer
 
