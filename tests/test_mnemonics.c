@@ -3,6 +3,14 @@
 #include <stdlib.h>
 
 #include "mnemonics.h"
+#include "errorcodes.h"
+#include "dictionary.h"
+
+/*
+====================
+======= Test Vectors
+====================
+*/
 
 #define VECTOR_PASSPHRASE "TREZOR"
 #define VECTOR_PASSPHRASE_L 6
@@ -60,7 +68,7 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -84,7 +92,7 @@ START_TEST (vector_0_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -164,7 +172,7 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -188,7 +196,7 @@ START_TEST (vector_1_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -268,7 +276,7 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -292,7 +300,7 @@ START_TEST (vector_2_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -372,7 +380,7 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -396,7 +404,7 @@ START_TEST (vector_3_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -476,7 +484,7 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -500,7 +508,7 @@ START_TEST (vector_4_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -580,7 +588,7 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -604,7 +612,7 @@ START_TEST (vector_5_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -684,7 +692,7 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -708,7 +716,7 @@ START_TEST (vector_6_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -788,7 +796,7 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -812,7 +820,7 @@ START_TEST (vector_7_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -892,7 +900,7 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -916,7 +924,7 @@ START_TEST (vector_8_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -996,7 +1004,7 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1020,7 +1028,7 @@ START_TEST (vector_9_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1100,7 +1108,7 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1124,7 +1132,7 @@ START_TEST (vector_10_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1204,7 +1212,7 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1228,7 +1236,7 @@ START_TEST (vector_11_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1308,7 +1316,7 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1332,7 +1340,7 @@ START_TEST (vector_12_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1412,7 +1420,7 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1436,7 +1444,7 @@ START_TEST (vector_13_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1516,7 +1524,7 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1540,7 +1548,7 @@ START_TEST (vector_14_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1620,7 +1628,7 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1644,7 +1652,7 @@ START_TEST (vector_15_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1724,7 +1732,7 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1748,7 +1756,7 @@ START_TEST (vector_16_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1828,7 +1836,7 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1852,7 +1860,7 @@ START_TEST (vector_17_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -1932,7 +1940,7 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -1956,7 +1964,7 @@ START_TEST (vector_18_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2036,7 +2044,7 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2060,7 +2068,7 @@ START_TEST (vector_19_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2140,7 +2148,7 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2164,7 +2172,7 @@ START_TEST (vector_20_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2244,7 +2252,7 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2268,7 +2276,7 @@ START_TEST (vector_21_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2348,7 +2356,7 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2372,7 +2380,7 @@ START_TEST (vector_22_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2452,7 +2460,7 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_seed nonzero error code = %d.",
         err
     );
@@ -2476,7 +2484,7 @@ START_TEST (vector_23_en)
     );
 
     ck_assert_msg(
-        err == 0,
+        err == EC_OK,
         "mnemonic_to_entropy nonzero error code = %llu.",
         err
     );
@@ -2503,6 +2511,652 @@ START_TEST (vector_23_en)
 }
 END_TEST
 
+/*
+=====================
+===== to mnemonic
+=====================
+*/
+
+START_TEST ( to_mnemonic_NULL_entropy )
+{
+    unsigned char *mnemonic;
+    int err;
+    err = entropy_to_mnemonic(
+        NULL,
+        NULL, // entropy
+        10,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null entropy param did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_NULL_mnemonic )
+{
+#define VECTOR_NULL_TEST_E_LEN 32
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_NULL_TEST_E_LEN;
+    int err;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        NULL
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic pointer did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_too_big_multiple )
+{
+#define VECTOR_TOO_BIG_MULTIPLE_E_LEN 64
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f,0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_TOO_BIG_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_WITHIN_16_32,
+        "Too large entropy buffer did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_too_small_multiple )
+{
+#define VECTOR_TOO_SMALL_MULTIPLE_E_LEN 8
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5
+    };
+    size_t entropy_l = VECTOR_TOO_SMALL_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_WITHIN_16_32,
+        "Entropy buffer too small did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_not_multiple )
+{
+#define VECTOR_NOT_MULTIPLE_E_LEN 31
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d
+    };
+    size_t entropy_l = VECTOR_NOT_MULTIPLE_E_LEN;
+    int err;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, // entropy
+        entropy_l,
+        &mnemonic
+    );
+    ck_assert_msg(
+        err == EC_ENTROPY_LENGTH_NOT_MULTIPLE_OF_4,
+        "Entropy buffer not multiple of 4 did not raise proper error."
+    );
+}
+END_TEST
+
+START_TEST ( to_mnemonic_entropy_larger_buffer )
+{
+#define VECTOR_LARGE_BUFFER_M_LEN 152
+#define VECTOR_LARGE_BUFFER_E_LEN 32
+    unsigned char entropy[] = {
+0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f,0xf5,0x85,0xc1,0x1a,0xec,0x52,0x0d,0xb5,0x7d,0xd3,0x53,0xc6,0x95,0x54,0xb2,0x1a,0x89,0xb2,0x0f,0xb0,0x65,0x09,0x66,0xfa,0x0a,0x9d,0x6f,0x74,0xfd,0x98,0x9d,0x8f
+    };
+    size_t entropy_l = VECTOR_LARGE_BUFFER_E_LEN;
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char *mnemonic;
+    err = entropy_to_mnemonic(
+        NULL,
+        entropy, entropy_l,
+        &mnemonic
+    );
+
+    ck_assert_msg(
+        err >= 0,
+        "entropy_to_mnemonic nonzero error code = %d.",
+        err
+    );
+
+    ck_assert_msg(
+        mnemonic != NULL,
+        "Output mnemonic is NULL."
+    );
+
+    size_t mnemonic_l = strlen((char *) mnemonic);
+    ck_assert_msg(
+        mnemonic_l == VECTOR_LARGE_BUFFER_M_LEN,
+        "Output mnemonic size didn't match = %llu.",
+        mnemonic_l
+    );
+
+    ck_assert_msg(
+        memcmp(mnemonic, mnemonic_ref, VECTOR_LARGE_BUFFER_M_LEN) == 0,
+        "Output didn't match."
+    );
+    free(mnemonic);
+}
+END_TEST
+
+/*
+====================
+==== to seed
+====================
+*/
+
+START_TEST ( to_seed_NULL_mnemonic )
+{
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        NULL, 23,
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "NULL mnemonic pointer did not raise proper error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_NULL_pass )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        NULL, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_OK,
+        "NULL pass pointer did not generate seed succesfully."
+    );
+
+    free(seed);
+}
+END_TEST
+
+START_TEST ( to_seed_zero_pass )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, 0,
+        &seed
+    );
+
+    ck_assert_msg(
+        err == EC_OK,
+        "0 length pass did not generate seed succesfully."
+    );
+
+    free(seed);
+}
+END_TEST
+
+START_TEST ( to_seed_NULL_seed )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        NULL
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "NULL seed pointer did not raise proper error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_smaller_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch";
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Mnemonic too short didn't raise error"
+    );
+}
+END_TEST
+
+START_TEST ( to_seed_longer_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold unfold";
+
+    int err=0;
+    unsigned char* seed;
+    err = mnemonic_to_seed(
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        (unsigned char*) VECTOR_PASSPHRASE, VECTOR_PASSPHRASE_L,
+        &seed
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Mnemonic too long didn't raise error"
+    );
+}
+END_TEST
+
+/*
+====================
+==== to entropy
+====================
+*/
+
+START_TEST ( to_entropy_NULL_mnemonic )
+{
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        NULL, 10,
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_NULL_entropy )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        NULL, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_NULL_entropy_l )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        &s_entropy, NULL
+    );
+
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Null mnemonic didnt raise approriate error."
+    );
+}
+END_TEST
+
+
+START_TEST ( to_entropy_longer_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Error code is zero for longer mnemonic."
+    );
+}
+END_TEST
+
+START_TEST ( to_entropy_shorter_mnemonic )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    err = mnemonic_to_entropy(
+        NULL,
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        &s_entropy, &s_entropy_l
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Error code is zero for shorter mnemonic."
+    );
+}
+END_TEST
+
+/*
+========================
+===== dict from file
+========================
+*/
+
+START_TEST ( dictionary_NULL_path )
+{
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        NULL,
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Error code not EC_NULL_POINTER = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_NULL_dict )
+{
+    int err;
+    err = parse_dict_from_file(
+        "resources/tests/english.txt",
+        NULL
+    );
+    ck_assert_msg(
+        err == EC_NULL_POINTER,
+        "Error code not EC_NULL_POINTER = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_file_doesntexist )
+{
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        "resources/tests/doesnotexist.txt",
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_ERROR_OPENING_FILE,
+        "Error code not EC_ERROR_OPENING_FILE = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_file_shorter )
+{
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        "resources/tests/english_few_words.txt",
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_NOT_ENOUGH_WORDS,
+        "Error code not EC_NOT_ENOUGH_WORDS = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_file_longer )
+{
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        "resources/tests/english_too_many_words.txt",
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_FILE_TOO_LONG,
+        "Error code not EC_FILE_TOO_LONG = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_word_too_long )
+{
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        "resources/tests/english_word_too_long.txt",
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_WORD_TOO_LONG,
+        "Error code not EC_WORD_TOO_LONG = %d",
+        err
+    );
+}
+END_TEST
+
+START_TEST ( dictionary_english_dict )
+{
+    const char* ref[] = {
+    "abandon","ability","able","about","above","absent","absorb","abstract","absurd","abuse","access","accident","account","accuse","achieve","acid",
+    "acoustic","acquire","across","act","action","actor","actress","actual","adapt","add","addict","address","adjust","admit","adult","advance",
+    "advice","aerobic","affair","afford","afraid","again","age","agent","agree","ahead","aim","air","airport","aisle","alarm","album",
+    "alcohol","alert","alien","all","alley","allow","almost","alone","alpha","already","also","alter","always","amateur","amazing","among",
+    "amount","amused","analyst","anchor","ancient","anger","angle","angry","animal","ankle","announce","annual","another","answer","antenna","antique",
+    "anxiety","any","apart","apology","appear","apple","approve","april","arch","arctic","area","arena","argue","arm","armed","armor",
+    "army","around","arrange","arrest","arrive","arrow","art","artefact","artist","artwork","ask","aspect","assault","asset","assist","assume",
+    "asthma","athlete","atom","attack","attend","attitude","attract","auction","audit","august","aunt","author","auto","autumn","average","avocado",
+    "avoid","awake","aware","away","awesome","awful","awkward","axis","baby","bachelor","bacon","badge","bag","balance","balcony","ball",
+    "bamboo","banana","banner","bar","barely","bargain","barrel","base","basic","basket","battle","beach","bean","beauty","because","become",
+    "beef","before","begin","behave","behind","believe","below","belt","bench","benefit","best","betray","better","between","beyond","bicycle",
+    "bid","bike","bind","biology","bird","birth","bitter","black","blade","blame","blanket","blast","bleak","bless","blind","blood",
+    "blossom","blouse","blue","blur","blush","board","boat","body","boil","bomb","bone","bonus","book","boost","border","boring",
+    "borrow","boss","bottom","bounce","box","boy","bracket","brain","brand","brass","brave","bread","breeze","brick","bridge","brief",
+    "bright","bring","brisk","broccoli","broken","bronze","broom","brother","brown","brush","bubble","buddy","budget","buffalo","build","bulb",
+    "bulk","bullet","bundle","bunker","burden","burger","burst","bus","business","busy","butter","buyer","buzz","cabbage","cabin","cable",
+    "cactus","cage","cake","call","calm","camera","camp","can","canal","cancel","candy","cannon","canoe","canvas","canyon","capable",
+    "capital","captain","car","carbon","card","cargo","carpet","carry","cart","case","cash","casino","castle","casual","cat","catalog",
+    "catch","category","cattle","caught","cause","caution","cave","ceiling","celery","cement","census","century","cereal","certain","chair","chalk",
+    "champion","change","chaos","chapter","charge","chase","chat","cheap","check","cheese","chef","cherry","chest","chicken","chief","child",
+    "chimney","choice","choose","chronic","chuckle","chunk","churn","cigar","cinnamon","circle","citizen","city","civil","claim","clap","clarify",
+    "claw","clay","clean","clerk","clever","click","client","cliff","climb","clinic","clip","clock","clog","close","cloth","cloud",
+    "clown","club","clump","cluster","clutch","coach","coast","coconut","code","coffee","coil","coin","collect","color","column","combine",
+    "come","comfort","comic","common","company","concert","conduct","confirm","congress","connect","consider","control","convince","cook","cool","copper",
+    "copy","coral","core","corn","correct","cost","cotton","couch","country","couple","course","cousin","cover","coyote","crack","cradle",
+    "craft","cram","crane","crash","crater","crawl","crazy","cream","credit","creek","crew","cricket","crime","crisp","critic","crop",
+    "cross","crouch","crowd","crucial","cruel","cruise","crumble","crunch","crush","cry","crystal","cube","culture","cup","cupboard","curious",
+    "current","curtain","curve","cushion","custom","cute","cycle","dad","damage","damp","dance","danger","daring","dash","daughter","dawn",
+    "day","deal","debate","debris","decade","december","decide","decline","decorate","decrease","deer","defense","define","defy","degree","delay",
+    "deliver","demand","demise","denial","dentist","deny","depart","depend","deposit","depth","deputy","derive","describe","desert","design","desk",
+    "despair","destroy","detail","detect","develop","device","devote","diagram","dial","diamond","diary","dice","diesel","diet","differ","digital",
+    "dignity","dilemma","dinner","dinosaur","direct","dirt","disagree","discover","disease","dish","dismiss","disorder","display","distance","divert","divide",
+    "divorce","dizzy","doctor","document","dog","doll","dolphin","domain","donate","donkey","donor","door","dose","double","dove","draft",
+    "dragon","drama","drastic","draw","dream","dress","drift","drill","drink","drip","drive","drop","drum","dry","duck","dumb",
+    "dune","during","dust","dutch","duty","dwarf","dynamic","eager","eagle","early","earn","earth","easily","east","easy","echo",
+    "ecology","economy","edge","edit","educate","effort","egg","eight","either","elbow","elder","electric","elegant","element","elephant","elevator",
+    "elite","else","embark","embody","embrace","emerge","emotion","employ","empower","empty","enable","enact","end","endless","endorse","enemy",
+    "energy","enforce","engage","engine","enhance","enjoy","enlist","enough","enrich","enroll","ensure","enter","entire","entry","envelope","episode",
+    "equal","equip","era","erase","erode","erosion","error","erupt","escape","essay","essence","estate","eternal","ethics","evidence","evil",
+    "evoke","evolve","exact","example","excess","exchange","excite","exclude","excuse","execute","exercise","exhaust","exhibit","exile","exist","exit",
+    "exotic","expand","expect","expire","explain","expose","express","extend","extra","eye","eyebrow","fabric","face","faculty","fade","faint",
+    "faith","fall","false","fame","family","famous","fan","fancy","fantasy","farm","fashion","fat","fatal","father","fatigue","fault",
+    "favorite","feature","february","federal","fee","feed","feel","female","fence","festival","fetch","fever","few","fiber","fiction","field",
+    "figure","file","film","filter","final","find","fine","finger","finish","fire","firm","first","fiscal","fish","fit","fitness",
+    "fix","flag","flame","flash","flat","flavor","flee","flight","flip","float","flock","floor","flower","fluid","flush","fly",
+    "foam","focus","fog","foil","fold","follow","food","foot","force","forest","forget","fork","fortune","forum","forward","fossil",
+    "foster","found","fox","fragile","frame","frequent","fresh","friend","fringe","frog","front","frost","frown","frozen","fruit","fuel",
+    "fun","funny","furnace","fury","future","gadget","gain","galaxy","gallery","game","gap","garage","garbage","garden","garlic","garment",
+    "gas","gasp","gate","gather","gauge","gaze","general","genius","genre","gentle","genuine","gesture","ghost","giant","gift","giggle",
+    "ginger","giraffe","girl","give","glad","glance","glare","glass","glide","glimpse","globe","gloom","glory","glove","glow","glue",
+    "goat","goddess","gold","good","goose","gorilla","gospel","gossip","govern","gown","grab","grace","grain","grant","grape","grass",
+    "gravity","great","green","grid","grief","grit","grocery","group","grow","grunt","guard","guess","guide","guilt","guitar","gun",
+    "gym","habit","hair","half","hammer","hamster","hand","happy","harbor","hard","harsh","harvest","hat","have","hawk","hazard",
+    "head","health","heart","heavy","hedgehog","height","hello","helmet","help","hen","hero","hidden","high","hill","hint","hip",
+    "hire","history","hobby","hockey","hold","hole","holiday","hollow","home","honey","hood","hope","horn","horror","horse","hospital",
+    "host","hotel","hour","hover","hub","huge","human","humble","humor","hundred","hungry","hunt","hurdle","hurry","hurt","husband",
+    "hybrid","ice","icon","idea","identify","idle","ignore","ill","illegal","illness","image","imitate","immense","immune","impact","impose",
+    "improve","impulse","inch","include","income","increase","index","indicate","indoor","industry","infant","inflict","inform","inhale","inherit","initial",
+    "inject","injury","inmate","inner","innocent","input","inquiry","insane","insect","inside","inspire","install","intact","interest","into","invest",
+    "invite","involve","iron","island","isolate","issue","item","ivory","jacket","jaguar","jar","jazz","jealous","jeans","jelly","jewel",
+    "job","join","joke","journey","joy","judge","juice","jump","jungle","junior","junk","just","kangaroo","keen","keep","ketchup",
+    "key","kick","kid","kidney","kind","kingdom","kiss","kit","kitchen","kite","kitten","kiwi","knee","knife","knock","know",
+    "lab","label","labor","ladder","lady","lake","lamp","language","laptop","large","later","latin","laugh","laundry","lava","law",
+    "lawn","lawsuit","layer","lazy","leader","leaf","learn","leave","lecture","left","leg","legal","legend","leisure","lemon","lend",
+    "length","lens","leopard","lesson","letter","level","liar","liberty","library","license","life","lift","light","like","limb","limit",
+    "link","lion","liquid","list","little","live","lizard","load","loan","lobster","local","lock","logic","lonely","long","loop",
+    "lottery","loud","lounge","love","loyal","lucky","luggage","lumber","lunar","lunch","luxury","lyrics","machine","mad","magic","magnet",
+    "maid","mail","main","major","make","mammal","man","manage","mandate","mango","mansion","manual","maple","marble","march","margin",
+    "marine","market","marriage","mask","mass","master","match","material","math","matrix","matter","maximum","maze","meadow","mean","measure",
+    "meat","mechanic","medal","media","melody","melt","member","memory","mention","menu","mercy","merge","merit","merry","mesh","message",
+    "metal","method","middle","midnight","milk","million","mimic","mind","minimum","minor","minute","miracle","mirror","misery","miss","mistake",
+    "mix","mixed","mixture","mobile","model","modify","mom","moment","monitor","monkey","monster","month","moon","moral","more","morning",
+    "mosquito","mother","motion","motor","mountain","mouse","move","movie","much","muffin","mule","multiply","muscle","museum","mushroom","music",
+    "must","mutual","myself","mystery","myth","naive","name","napkin","narrow","nasty","nation","nature","near","neck","need","negative",
+    "neglect","neither","nephew","nerve","nest","net","network","neutral","never","news","next","nice","night","noble","noise","nominee",
+    "noodle","normal","north","nose","notable","note","nothing","notice","novel","now","nuclear","number","nurse","nut","oak","obey",
+    "object","oblige","obscure","observe","obtain","obvious","occur","ocean","october","odor","off","offer","office","often","oil","okay",
+    "old","olive","olympic","omit","once","one","onion","online","only","open","opera","opinion","oppose","option","orange","orbit",
+    "orchard","order","ordinary","organ","orient","original","orphan","ostrich","other","outdoor","outer","output","outside","oval","oven","over",
+    "own","owner","oxygen","oyster","ozone","pact","paddle","page","pair","palace","palm","panda","panel","panic","panther","paper",
+    "parade","parent","park","parrot","party","pass","patch","path","patient","patrol","pattern","pause","pave","payment","peace","peanut",
+    "pear","peasant","pelican","pen","penalty","pencil","people","pepper","perfect","permit","person","pet","phone","photo","phrase","physical",
+    "piano","picnic","picture","piece","pig","pigeon","pill","pilot","pink","pioneer","pipe","pistol","pitch","pizza","place","planet",
+    "plastic","plate","play","please","pledge","pluck","plug","plunge","poem","poet","point","polar","pole","police","pond","pony",
+    "pool","popular","portion","position","possible","post","potato","pottery","poverty","powder","power","practice","praise","predict","prefer","prepare",
+    "present","pretty","prevent","price","pride","primary","print","priority","prison","private","prize","problem","process","produce","profit","program",
+    "project","promote","proof","property","prosper","protect","proud","provide","public","pudding","pull","pulp","pulse","pumpkin","punch","pupil",
+    "puppy","purchase","purity","purpose","purse","push","put","puzzle","pyramid","quality","quantum","quarter","question","quick","quit","quiz",
+    "quote","rabbit","raccoon","race","rack","radar","radio","rail","rain","raise","rally","ramp","ranch","random","range","rapid",
+    "rare","rate","rather","raven","raw","razor","ready","real","reason","rebel","rebuild","recall","receive","recipe","record","recycle",
+    "reduce","reflect","reform","refuse","region","regret","regular","reject","relax","release","relief","rely","remain","remember","remind","remove",
+    "render","renew","rent","reopen","repair","repeat","replace","report","require","rescue","resemble","resist","resource","response","result","retire",
+    "retreat","return","reunion","reveal","review","reward","rhythm","rib","ribbon","rice","rich","ride","ridge","rifle","right","rigid",
+    "ring","riot","ripple","risk","ritual","rival","river","road","roast","robot","robust","rocket","romance","roof","rookie","room",
+    "rose","rotate","rough","round","route","royal","rubber","rude","rug","rule","run","runway","rural","sad","saddle","sadness",
+    "safe","sail","salad","salmon","salon","salt","salute","same","sample","sand","satisfy","satoshi","sauce","sausage","save","say",
+    "scale","scan","scare","scatter","scene","scheme","school","science","scissors","scorpion","scout","scrap","screen","script","scrub","sea",
+    "search","season","seat","second","secret","section","security","seed","seek","segment","select","sell","seminar","senior","sense","sentence",
+    "series","service","session","settle","setup","seven","shadow","shaft","shallow","share","shed","shell","sheriff","shield","shift","shine",
+    "ship","shiver","shock","shoe","shoot","shop","short","shoulder","shove","shrimp","shrug","shuffle","shy","sibling","sick","side",
+    "siege","sight","sign","silent","silk","silly","silver","similar","simple","since","sing","siren","sister","situate","six","size",
+    "skate","sketch","ski","skill","skin","skirt","skull","slab","slam","sleep","slender","slice","slide","slight","slim","slogan",
+    "slot","slow","slush","small","smart","smile","smoke","smooth","snack","snake","snap","sniff","snow","soap","soccer","social",
+    "sock","soda","soft","solar","soldier","solid","solution","solve","someone","song","soon","sorry","sort","soul","sound","soup",
+    "source","south","space","spare","spatial","spawn","speak","special","speed","spell","spend","sphere","spice","spider","spike","spin",
+    "spirit","split","spoil","sponsor","spoon","sport","spot","spray","spread","spring","spy","square","squeeze","squirrel","stable","stadium",
+    "staff","stage","stairs","stamp","stand","start","state","stay","steak","steel","stem","step","stereo","stick","still","sting",
+    "stock","stomach","stone","stool","story","stove","strategy","street","strike","strong","struggle","student","stuff","stumble","style","subject",
+    "submit","subway","success","such","sudden","suffer","sugar","suggest","suit","summer","sun","sunny","sunset","super","supply","supreme",
+    "sure","surface","surge","surprise","surround","survey","suspect","sustain","swallow","swamp","swap","swarm","swear","sweet","swift","swim",
+    "swing","switch","sword","symbol","symptom","syrup","system","table","tackle","tag","tail","talent","talk","tank","tape","target",
+    "task","taste","tattoo","taxi","teach","team","tell","ten","tenant","tennis","tent","term","test","text","thank","that",
+    "theme","then","theory","there","they","thing","this","thought","three","thrive","throw","thumb","thunder","ticket","tide","tiger",
+    "tilt","timber","time","tiny","tip","tired","tissue","title","toast","tobacco","today","toddler","toe","together","toilet","token",
+    "tomato","tomorrow","tone","tongue","tonight","tool","tooth","top","topic","topple","torch","tornado","tortoise","toss","total","tourist",
+    "toward","tower","town","toy","track","trade","traffic","tragic","train","transfer","trap","trash","travel","tray","treat","tree",
+    "trend","trial","tribe","trick","trigger","trim","trip","trophy","trouble","truck","true","truly","trumpet","trust","truth","try",
+    "tube","tuition","tumble","tuna","tunnel","turkey","turn","turtle","twelve","twenty","twice","twin","twist","two","type","typical",
+    "ugly","umbrella","unable","unaware","uncle","uncover","under","undo","unfair","unfold","unhappy","uniform","unique","unit","universe","unknown",
+    "unlock","until","unusual","unveil","update","upgrade","uphold","upon","upper","upset","urban","urge","usage","use","used","useful",
+    "useless","usual","utility","vacant","vacuum","vague","valid","valley","valve","van","vanish","vapor","various","vast","vault","vehicle",
+    "velvet","vendor","venture","venue","verb","verify","version","very","vessel","veteran","viable","vibrant","vicious","victory","video","view",
+    "village","vintage","violin","virtual","virus","visa","visit","visual","vital","vivid","vocal","voice","void","volcano","volume","vote",
+    "voyage","wage","wagon","wait","walk","wall","walnut","want","warfare","warm","warrior","wash","wasp","waste","water","wave",
+    "way","wealth","weapon","wear","weasel","weather","web","wedding","weekend","weird","welcome","west","wet","whale","what","wheat",
+    "wheel","when","where","whip","whisper","wide","width","wife","wild","will","win","window","wine","wing","wink","winner",
+    "winter","wire","wisdom","wise","wish","witness","wolf","woman","wonder","wood","wool","word","work","world","worry","worth",
+    "wrap","wreck","wrestle","wrist","write","wrong","yard","year","yellow","you","young","youth","zebra","zero","zone","zoo"
+    };
+
+    int err;
+    struct dictionary dict;
+    err = parse_dict_from_file(
+        "resources/tests/english.txt",
+        &dict
+    );
+    ck_assert_msg(
+        err == EC_OK,
+        "Nonzero error code. = %d",
+        err
+    );
+    unsigned int i;
+    for (i=0; i<2048; i++)
+    {
+        ck_assert_msg( 
+            strcmp((char *) dict.words[i], ref[i]) == 0,
+            "Incorrect word for index %u.",
+            i 
+        );
+    }
+    free_dict(&dict);
+}
+END_TEST
+
+/*
+START_TEST ( test_name )
+{
+    ck_assert_msg(
+        1 == 0,
+        "msg"
+    );
+}
+END_TEST
+*/
 
 Suite * mnemonics_test_suite(void)
 {
@@ -2514,6 +3168,7 @@ Suite * mnemonics_test_suite(void)
     /* Core test case */
     tc_core = tcase_create("Core");
 
+    // test vectors
     tcase_add_test(tc_core, vector_0_en);
     tcase_add_test(tc_core, vector_1_en);
     tcase_add_test(tc_core, vector_2_en);
@@ -2539,6 +3194,38 @@ Suite * mnemonics_test_suite(void)
     tcase_add_test(tc_core, vector_22_en);
     tcase_add_test(tc_core, vector_23_en);
     
+    // to mnemonic
+    tcase_add_test(tc_core, to_mnemonic_NULL_entropy);
+    tcase_add_test(tc_core, to_mnemonic_NULL_mnemonic);
+    tcase_add_test(tc_core, to_mnemonic_entropy_too_big_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_too_small_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_not_multiple);
+    tcase_add_test(tc_core, to_mnemonic_entropy_larger_buffer);
+
+    // to seed
+    tcase_add_test(tc_core, to_seed_NULL_mnemonic);
+    tcase_add_test(tc_core, to_seed_NULL_pass);
+    tcase_add_test(tc_core, to_seed_zero_pass);
+    tcase_add_test(tc_core, to_seed_NULL_seed);
+    tcase_add_test(tc_core, to_seed_smaller_mnemonic);
+    tcase_add_test(tc_core, to_seed_longer_mnemonic);
+
+    // to entropy
+    tcase_add_test(tc_core, to_entropy_NULL_mnemonic);
+    tcase_add_test(tc_core, to_entropy_NULL_entropy);
+    tcase_add_test(tc_core, to_entropy_NULL_entropy_l);
+    tcase_add_test(tc_core, to_entropy_shorter_mnemonic);
+    tcase_add_test(tc_core, to_entropy_longer_mnemonic);
+
+    // dictionary from file
+    tcase_add_test(tc_core, dictionary_NULL_path);
+    tcase_add_test(tc_core, dictionary_NULL_dict);
+    tcase_add_test(tc_core, dictionary_file_doesntexist);
+    tcase_add_test(tc_core, dictionary_file_shorter);
+    tcase_add_test(tc_core, dictionary_file_longer);
+    tcase_add_test(tc_core, dictionary_word_too_long);
+    tcase_add_test(tc_core, dictionary_english_dict);
+
     suite_add_tcase(s, tc_core);
 
     return s;
