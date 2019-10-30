@@ -24,7 +24,7 @@ Compiling tests requires unit testing framework Check >= 0.12.0.
 
 # API Usage
 
-Sample usage can be found in (TODO LINK).
+Sample usage can be found in [example.c](https://github.com/TomasMadeja/PA193_mnemonic_BugsBunny/blob/master/src/example.c).
 
 ## **Header:** mnemonics.h
 
@@ -129,8 +129,8 @@ This project is a part of an assignament for PB193 - Secure coding principles an
 https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 
 ## Team Members
-- Attila Farkas
-- Tomáš Madeja
-- Imrich Nagy
+- [Attila Farkas](https://github.com/ati4)
+- [Tomáš Madeja](https://github.com/TomasMadeja)
+- [Imrich Nagy](https://github.com/NimRo97)
 
 
