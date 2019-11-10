@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -82,8 +83,7 @@ void print_help() {
 
 size_t get_mnemonic(char *file_name, unsigned char *mnemonic) {
 
-    FILE *file;
-    file = fopen(file_name, "r");
+    FILE *file = fopen(file_name, "r");
 
     if(!file) {
         return 0;
@@ -92,7 +92,9 @@ size_t get_mnemonic(char *file_name, unsigned char *mnemonic) {
     int c;
     size_t i = 0;
     while (i < MNEMONIC_BUFFER_LEN && (c = fgetc(file)) != EOF) {
-        putchar(c);
+        if (!isprint(c)) {
+            return 0;
+        }
         mnemonic[i] = c;
         i++;
     }
@@ -158,7 +160,7 @@ void convert_mnemonics_to_seed(char *mnemonics_file_name) {
     mnemonic_len = get_mnemonic(mnemonics_file_name, mnemonic);
 
     if (mnemonic_len == 0) {
-        printf("Error: Cannot load the mnemonic file.\n");
+        printf("Error: Cannot load the mnemonic file or file contains unprintable chars.\n");
         return;
     }
 
@@ -193,7 +195,7 @@ void convert_mnemonic_to_entropy(char *mnemonics_file_name) {
     mnemonic_len = get_mnemonic(mnemonics_file_name, mnemonic);
 
     if (mnemonic_len == 0) {
-        printf("Error: Cannot load the mnemonic file.\n");
+        printf("Error: Cannot load the mnemonic file or file contains unprintable chars.\n");
         return;
     }
 
