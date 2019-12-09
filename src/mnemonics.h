@@ -79,28 +79,6 @@ int entropy_to_mnemonic_seed(const struct dictionary *dictionary,
                              unsigned char **seed);
 
 /**
- * @brief mnemonic_to_entropy_seed
- * @param dictionary   initialized dictionary
- *                     if set to NULL, default dictionary will be used
- * @param mnemonic     mnemonic phrase
- * @param mnemonic_l   length of mnemonic phrase
- * @param passphrase   passphrase. If set to NULL, default passphrase "" used.
- * @param passphrase_l length of passphrase
- * @param entropy      stores pointer to allocated memory containing memory
- * @param entropy_l    pointer to variable to store size of entropy in bytes
- * @param seed         stores pointer to allocated memory containing seed
- * @return 0 in case of success, negative error code otherwise
- */
-int mnemonic_to_entropy_seed(const struct dictionary *dictionary,
-                             const unsigned char *mnemonic,
-                             size_t mnemonic_l,
-                             const unsigned char *passphrase,
-                             size_t passphrase_l,
-                             unsigned char **entropy,
-                             size_t *entropy_l,
-                             unsigned char **seed);
-
-/**
  * @brief check_phrase_seed
  * @param mnemonic     mnemonic phrase
  * @param mnemonic_l   length of mnemonic phrase

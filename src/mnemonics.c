@@ -402,29 +402,6 @@ int entropy_to_mnemonic_seed(const struct dictionary *dictionary,
     return ret;
 }
 
-int mnemonic_to_entropy_seed(const struct dictionary *dictionary,
-                             const unsigned char *mnemonic,
-                             size_t mnemonic_l,
-                             const unsigned char *passphrase,
-                             size_t passphrase_l,
-                             unsigned char **entropy,
-                             size_t *entropy_l,
-                             unsigned char **seed) {
-
-    int ret = mnemonic_to_entropy(dictionary, mnemonic, mnemonic_l,
-                                  entropy, entropy_l);
-    if (ret != EC_OK) {
-        return ret;
-    }
-    ret = mnemonic_to_entropy_seed(dictionary, mnemonic, mnemonic_l,
-                                   passphrase, passphrase_l,
-                                   entropy, entropy_l, seed);
-    if (ret != EC_OK) {
-        free(*entropy);
-    }
-    return ret;
-}
-
 int check_phrase_seed(const unsigned char *mnemonic,
                       size_t mnemonic_l,
                       const unsigned char *passphrase,
