@@ -2891,6 +2891,36 @@ END_TEST
 
 /*
 ========================
+==== to entropy and seed
+========================
+*/
+
+START_TEST ( to_entropy_and_seed )
+{
+    unsigned char mnemonic_ref[] = "void come effort suffer camp survey warrior heavy shoot primary clutch crush open amazing screen patrol group space point ten exist slush involve unfold";
+
+    int err=0;
+    unsigned char* s_entropy;
+    size_t s_entropy_l;
+    unsigned char* seed;
+
+    err = mnemonic_to_entropy_seed(
+        NULL,
+        mnemonic_ref, strlen( (char *) mnemonic_ref),
+        (unsigned char*) "TREZOR", 6,
+        &s_entropy, &s_entropy_l,
+        &seed
+    );
+
+    ck_assert_msg(
+        err != EC_OK,
+        "Error code is zero for mnemonic to entropy and seed."
+    );
+}
+END_TEST
+
+/*
+========================
 ===== dict from file
 ========================
 */
@@ -3216,6 +3246,9 @@ Suite * mnemonics_test_suite(void)
     tcase_add_test(tc_core, to_entropy_NULL_entropy_l);
     tcase_add_test(tc_core, to_entropy_shorter_mnemonic);
     tcase_add_test(tc_core, to_entropy_longer_mnemonic);
+
+    // to entropy and seed
+    tcase_add_test(tc_core, to_entropy_and_seed);
 
     // dictionary from file
     tcase_add_test(tc_core, dictionary_NULL_path);
