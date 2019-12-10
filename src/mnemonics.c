@@ -65,6 +65,7 @@ int entropy_to_mnemonic(const struct dictionary *dictionary,
     memcpy(bytes, entropy, entropy_l);
 
     if (append_sha256_bytes(bytes, entropy_l) != 0) {
+        free(bytes);
         return EC_OPENSSL_ERROR;
     }
 
