@@ -2,6 +2,7 @@
 
 echo "Do a setup.."
 # make the proof of concept code
+make clean
 make leak
 # make a shared object as a replacement for some OpenSSL function
 shared_object="patch.so"
