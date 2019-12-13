@@ -135,7 +135,7 @@ void convert_entropy_to_mnemonics(char *entropy_file_name) {
     /* Converting entropy to a mnemonic phrase using the default dictionary. */
     return_code = entropy_to_mnemonic(NULL, entropy, entropy_len, &mnemonic);
 
-    if (return_code != 0) {
+    if (return_code <= 0) {
         printf("Error: Could not convert entropy.\n");
         return;
     }
